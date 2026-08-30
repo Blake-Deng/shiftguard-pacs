@@ -1,0 +1,8 @@
+torch
+torchvision
+timm>=1.0.0
+scikit-learn
+umap-learn
+Pillow
+scipy
+datasets>=2.18.0
