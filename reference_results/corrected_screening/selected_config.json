@@ -1,0 +1,14 @@
+{
+  "name": "adaptive_010_005",
+  "method": "adaptive",
+  "lambda_feat": 0.1,
+  "lambda_kl": 0.05,
+  "mean_source_val": 0.98326495071578,
+  "std_source_val": 0.005754548809269337,
+  "per_outer_target": {
+    "Photo": 0.9823717948717948,
+    "Art_Painting": 0.9756507136859782,
+    "Cartoon": 0.9860383944153578,
+    "Sketch": 0.988998899889989
+  }
+}

@@ -1,0 +1,86 @@
+[
+  {
+    "name": "adaptive_010_005",
+    "method": "adaptive",
+    "lambda_feat": 0.1,
+    "lambda_kl": 0.05,
+    "mean_source_val": 0.98326495071578,
+    "std_source_val": 0.005754548809269337,
+    "per_outer_target": {
+      "Photo": 0.9823717948717948,
+      "Art_Painting": 0.9756507136859782,
+      "Cartoon": 0.9860383944153578,
+      "Sketch": 0.988998899889989
+    }
+  },
+  {
+    "name": "featkl_005",
+    "method": "feat_kl",
+    "lambda_feat": 0.05,
+    "lambda_kl": 0.05,
+    "mean_source_val": 0.98196090394667,
+    "std_source_val": 0.0057914194682714346,
+    "per_outer_target": {
+      "Photo": 0.9799679487179487,
+      "Art_Painting": 0.9748110831234257,
+      "Cartoon": 0.9851657940663177,
+      "Sketch": 0.9878987898789879
+    }
+  },
+  {
+    "name": "feat_005",
+    "method": "feat",
+    "lambda_feat": 0.05,
+    "lambda_kl": 0.0,
+    "mean_source_val": 0.9817139924759571,
+    "std_source_val": 0.006685981274094794,
+    "per_outer_target": {
+      "Photo": 0.9823717948717948,
+      "Art_Painting": 0.9722921914357683,
+      "Cartoon": 0.9842931937172775,
+      "Sketch": 0.9878987898789879
+    }
+  },
+  {
+    "name": "adaptive_005",
+    "method": "adaptive",
+    "lambda_feat": 0.05,
+    "lambda_kl": 0.05,
+    "mean_source_val": 0.9812056746738986,
+    "std_source_val": 0.004561970325119844,
+    "per_outer_target": {
+      "Photo": 0.9815705128205128,
+      "Art_Painting": 0.9756507136859782,
+      "Cartoon": 0.9808027923211169,
+      "Sketch": 0.9867986798679867
+    }
+  },
+  {
+    "name": "kl_005",
+    "method": "kl",
+    "lambda_feat": 0.0,
+    "lambda_kl": 0.05,
+    "mean_source_val": 0.980300924249234,
+    "std_source_val": 0.005240684811893322,
+    "per_outer_target": {
+      "Photo": 0.9815705128205128,
+      "Art_Painting": 0.9731318219983207,
+      "Cartoon": 0.9808027923211169,
+      "Sketch": 0.9856985698569857
+    }
+  },
+  {
+    "name": "featkl_010_005",
+    "method": "feat_kl",
+    "lambda_feat": 0.1,
+    "lambda_kl": 0.05,
+    "mean_source_val": 0.9798408236177452,
+    "std_source_val": 0.005050312055974782,
+    "per_outer_target": {
+      "Photo": 0.9847756410256411,
+      "Art_Painting": 0.9731318219983207,
+      "Cartoon": 0.9790575916230366,
+      "Sketch": 0.9823982398239824
+    }
+  }
+]

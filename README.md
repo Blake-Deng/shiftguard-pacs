@@ -1,76 +1,146 @@
-# ShiftGuard PACS Domain Generalization
+# ShiftGuard PACS corrected experiments
 
-Source code for the ShiftGuard PACS domain-generalization experiments. This repository intentionally contains no manuscript, figures, local PACS images, checkpoints, or pretrained weights.
+This repository contains the corrected, target-blind PACS experiment code.
+It intentionally excludes the manuscript, author information, PACS images,
+model checkpoints, and pretrained weights.
 
 ## Dataset
 
-Use the complete PACS dataset from Hugging Face:
+- Hugging Face: https://huggingface.co/datasets/flwrlabs/pacs
+- Identifier: flwrlabs/pacs
+- Size: 9,991 images, four domains, seven classes
 
-- Dataset page: https://huggingface.co/datasets/flwrlabs/pacs
-- Dataset identifier: `flwrlabs/pacs`
+Expected layout:
 
-The expected exported layout is:
+    data/PACS/{photo,art_painting,cartoon,sketch}/
+      {dog,elephant,giraffe,guitar,horse,house,person}/*.jpg
 
-```text
-data/PACS/{Photo,Art_Painting,Cartoon,Sketch}/{dog,elephant,giraffe,guitar,horse,person,house}/*.jpg
-```
+Download and validate:
 
-Download and export it with:
+    python -m pip install -r requirements.txt
+    python download_pacs_hf.py --output data/PACS
+    python check_pacs.py data/PACS
 
-```bash
-python -m pip install -U datasets
-python download_pacs_hf.py --output data/PACS
-python check_pacs.py --data-root data/PACS
-```
+Do not commit data/PACS. PACS remains subject to its original terms.
 
-The Hugging Face dataset is the data source. Do not commit the downloaded images to GitHub; add `data/` to `.gitignore`.
+## Environment
 
-## Installation
+Reported environment: PyTorch 2.11.0+cu128, torchvision 0.26.0+cu128,
+timm 1.0.29, CUDA 12.8, and NVIDIA RTX 5090.
 
-```bash
-python -m venv .venv
-source .venv/bin/activate
-python -m pip install -U pip
-python -m pip install -r requirements.txt
-```
+    python -m venv .venv
+    source .venv/bin/activate
+    python -m pip install -U pip
+    python -m pip install -r requirements.txt
 
-For the exact ViT-S/16 experiment, place the local ImageNet checkpoint at `weights/vit_small_patch16_224.npz` or use the checkpoint-loading configuration documented in `shiftguard_v2.py`. ResNet-50 weights are obtained by torchvision when `--pretrained` is enabled.
+ResNet-50 weights are downloaded by torchvision. For exact pretrained
+ViT-S/16:
 
-## Quick smoke test
+    bash download_vit_weights.sh
 
-```bash
-./run_smoke.sh /path/to/data/PACS
-```
+The script writes weights/vit_small_patch16_224.npz and verifies SHA-256:
+545815b4e770d2fa6ca4b3ccba7c16b035e474354e52d17ca197ea4efecbf4d3.
 
-## Main experiments
+## Corrected implementation
 
-The canonical implementation is `shiftguard_v2.py`. It supports ERM, strong augmentation, Mixup, feature consistency, feature+KL consistency, and ShiftGuard.
+shiftguard_corrected.py supports:
 
-```bash
-python shiftguard_v2.py --data-root data/PACS --target Sketch \\
-  --method shiftguard --model resnet50 --seed 42 --epochs 30 \\
-  --lambda-feat 0.5 --lambda-kl 0.25 --output runs
-```
+- aug: matched weak/strong classification baseline
+- kl: one-way weak-to-strong KL
+- feat: detached feature consistency
+- feat_kl: detached feature plus one-way KL
+- adaptive: Feature+KL with detached reliability weighting
 
-Run the three-seed, four-target matrix:
+Screening does not construct the target dataset. Formal evaluation restores
+the best source-validation checkpoint, then constructs and evaluates the
+target exactly once.
 
-```bash
-./run_main_matrix.sh /path/to/data/PACS
-python summarize_results.py runs/results.csv
-```
+Single-run example:
 
-Additional scripts:
+    python shiftguard_corrected.py \
+      --data-root data/PACS \
+      --target Sketch \
+      --method feat_kl \
+      --run-name feature_plus_kl \
+      --model resnet50 \
+      --seed 42 \
+      --epochs 30 \
+      --batch-size 64 \
+      --lambda-feat 0.10 \
+      --lambda-kl 0.05 \
+      --temperature 2.0 \
+      --gate-tau 0.5 \
+      --warmup-epochs 5 \
+      --save-checkpoint \
+      --output runs/example
 
-- `coral_exp.py`: CORAL baseline.
-- `robustness_eval.py`: Sketch-target corruption evaluation.
-- `make_figures.py`: optional result visualization.
-- `shiftguard.py`: minimal ResNet-50 implementation used for the first baseline matrix.
-- `shiftguard_exp.py`: extended experiment entry point, including Mixup and exact timm ViT-S/16 support.
+Smoke test:
 
-## Reproducibility notes
+    python shiftguard_corrected.py \
+      --data-root data/PACS --target Sketch --method aug \
+      --run-name smoke --seed 42 --epochs 1 --batch-size 16 \
+      --workers 2 --no-pretrained --output runs/smoke
 
-Each target domain is held out completely. Source images are split into training and validation subsets; the best source-validation checkpoint is restored before target evaluation. The reported matrix uses targets `Photo`, `Art_Painting`, `Cartoon`, and `Sketch`, and seeds `42`, `123`, and `3407`.
+## Experiment order
 
-## License and data notice
+One GPU is the default. To select GPUs:
 
-Add the license required by your institution before publishing this repository. PACS images remain subject to their original dataset terms; link to the Hugging Face dataset instead of redistributing them.
+    export SHIFTGUARD_GPUS=0
+
+or:
+
+    export SHIFTGUARD_GPUS=0,1,2
+
+1. Source-only screening, formal ResNet, and exact ViT-S/16:
+
+    python run_corrected_pipeline.py
+
+2. Four variants x four targets x three seeds:
+
+    python run_corrected_ablation.py
+
+3. After ablation checkpoints exist, Sketch corruption robustness:
+
+    bash run_robustness_corrected.sh
+
+## Baseline context
+
+baselines contains the ERM, Mixup, and source-domain CORAL implementations
+used for contextual comparisons.
+
+Mixup:
+
+    python baselines/shiftguard_exp.py \
+      --data-root data/PACS --target Sketch --method mixup \
+      --model resnet50 --seed 42 --epochs 30 --output runs/mixup
+
+Source-only CORAL:
+
+    python baselines/coral_exp.py \
+      --data-root data/PACS --target Sketch --method coral \
+      --model resnet50 --seed 42 --epochs 30 \
+      --lambda-feat 0.5 --output runs/coral
+
+CORAL aligns covariance among source domains only.
+
+## Reference results
+
+reference_results includes every lightweight per-run JSON record:
+
+- corrected_ablation: 48 runs and summary
+- corrected_formal: 12 runs and summary
+- corrected_vit: 24 runs and summary
+- corrected_screening: source-validation selection records
+- corrected_robustness: 150 evaluations
+
+Macro standard deviation is calculated after averaging four domains within
+each seed, then taking sample standard deviation across three seed macros.
+
+## Interpretation
+
+Strong Augmentation: 87.20 +/- 0.16 percent.
+Feature+KL: 87.46 +/- 1.01 percent, a descriptive +0.26 point difference.
+Adaptive: 86.93 +/- 1.28 percent and not uniformly better.
+
+Do not claim significance from four domains or treat corruption severity
+levels as independent training runs.
