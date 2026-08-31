@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run target-blind screening, corrected ResNet formal runs, and ViT controls."""
+"""Run pooled cross-fold screening, corrected ResNet formal runs, and ViT controls."""
 from __future__ import annotations
 
 import csv

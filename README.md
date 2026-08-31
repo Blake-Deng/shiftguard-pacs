@@ -1,6 +1,6 @@
 # ShiftGuard PACS corrected experiments
 
-This repository contains the corrected, target-blind PACS experiment code.
+This repository contains the corrected PACS leave-one-domain-out experiment code.
 It intentionally excludes the manuscript, author information, PACS images,
 model checkpoints, and pretrained weights.
 
@@ -54,6 +54,14 @@ shiftguard_corrected.py supports:
 Screening does not construct the target dataset. Formal evaluation restores
 the best source-validation checkpoint, then constructs and evaluates the
 target exactly once.
+
+Candidate objectives are selected once using mean source-validation accuracy
+pooled across all four leave-one-domain-out configurations. The selected
+configuration is then frozen for the formal runs. Thus each individual run
+excludes its held-out domain from optimization, early stopping, and checkpoint
+selection, while the benchmark-level configuration selection is cross-fold
+rather than fully nested domain-wise model selection. Target accuracy is not
+used to rank candidate configurations.
 
 Single-run example:
 
@@ -127,10 +135,13 @@ CORAL aligns covariance among source domains only.
 
 reference_results includes every lightweight per-run JSON record:
 
+- corrected_screening: 24 screening jobs with no target evaluation
+- erm: 12 runs
+- mixup: 12 runs
+- coral: 12 source-only CORAL runs
 - corrected_ablation: 48 runs and summary
 - corrected_formal: 12 runs and summary
 - corrected_vit: 24 runs and summary
-- corrected_screening: source-validation selection records
 - corrected_robustness: 150 evaluations
 
 Macro standard deviation is calculated after averaging four domains within
@@ -144,3 +155,10 @@ Adaptive: 86.93 +/- 1.28 percent and not uniformly better.
 
 Do not claim significance from four domains or treat corruption severity
 levels as independent training runs.
+
+## Full audit records
+
+See RECORDS.md for the location and expected count of every published record.
+Recompute the JSON-derived per-domain and seed-level macro statistics with:
+
+    python summarize_reference_results.py

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Corrected ShiftGuard experiments with target-blind source validation.
+"""Corrected ShiftGuard experiments with source-validation checkpoint selection.
 
 Screening does not enumerate or load target images. Formal evaluation restores
 one source-validation-selected checkpoint, then constructs and evaluates the
