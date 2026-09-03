@@ -1,0 +1,2 @@
+dataset,target,method,run_name,model,seed,best_source_val,target_accuracy,target_loss,n_train,n_val,n_test,target_evaluations,elapsed_seconds
+vlcs,Caltech101,erm,erm,resnet50,42,0.829512893982808,0.9180212014134276,0.3109597950959669,7914,1396,1415,1,684.1142451763153

@@ -1,0 +1,2 @@
+dataset,target,method,run_name,model,seed,best_source_val,target_accuracy,target_loss,n_train,n_val,n_test,target_evaluations,elapsed_seconds
+vlcs,SUN09,strong_aug,strong_aug,resnet50,2027,0.8655913978494624,0.7236441194393662,0.8165078811860534,6327,1116,3282,1,1065.8049626350403

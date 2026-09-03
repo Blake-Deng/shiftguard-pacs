@@ -1,0 +1,2 @@
+dataset,target,method,run_name,model,seed,best_source_val,target_accuracy,target_loss,n_train,n_val,n_test,target_evaluations,elapsed_seconds
+pacs,Art_Painting,swad,swad,resnet50,2026,0.9815281276238456,0.8369140625,0.5854519968852401,6752,1191,2048,1,377.3016700744629

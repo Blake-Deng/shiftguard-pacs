@@ -1,0 +1,2 @@
+dataset,target,method,run_name,model,seed,best_source_val,target_accuracy,target_loss,n_train,n_val,n_test,target_evaluations,elapsed_seconds
+vlcs,LabelMe,feature_plus_kl,feature_plus_kl,resnet50,3407,0.884393063583815,0.6421568627450981,3.141602659567089,6862,1211,2652,1,696.3679738044739

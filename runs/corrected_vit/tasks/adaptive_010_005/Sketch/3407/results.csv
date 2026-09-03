@@ -1,0 +1,2 @@
+target,method,run_name,model,seed,best_source_val,target_accuracy,target_loss,n_train,n_val,n_test,target_evaluations,elapsed_seconds,lambda_feat,lambda_kl,temperature,gate_tau,warmup_epochs
+Sketch,adaptive,adaptive_010_005,vit-small,3407,0.9878987898789879,0.7330109442606261,1.1165212713034178,5153,909,3929,1,378.3146629333496,0.1,0.05,2.0,0.5,5

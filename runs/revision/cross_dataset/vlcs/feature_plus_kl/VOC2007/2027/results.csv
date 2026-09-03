@@ -1,0 +1,2 @@
+dataset,target,method,run_name,model,seed,best_source_val,target_accuracy,target_loss,n_train,n_val,n_test,target_evaluations,elapsed_seconds
+vlcs,VOC2007,feature_plus_kl,feature_plus_kl,resnet50,2027,0.8365122615803815,0.7020142180094787,1.3528181529158099,6248,1101,3376,1,1119.2743911743164

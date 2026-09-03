@@ -1,0 +1,38 @@
+{
+  "target": "Photo",
+  "method": "aug",
+  "run_name": "smoke_vit_preflight",
+  "model": "vit-small",
+  "seed": 42,
+  "best_source_val": 0.9447115384615384,
+  "target_accuracy": null,
+  "target_loss": null,
+  "n_train": 7073,
+  "n_val": 1248,
+  "n_test": 0,
+  "target_evaluations": 0,
+  "elapsed_seconds": 19.933326721191406,
+  "config": {
+    "lambda_feat": 0.0,
+    "lambda_kl": 0.0,
+    "temperature": 2.0,
+    "gate_tau": 0.5,
+    "weight_min": 0.5,
+    "weight_max": 2.0,
+    "warmup_epochs": 5,
+    "preprocessing": "timm_vit_standard"
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.5086504279212518,
+      "train_cls": 0.5086504279212518,
+      "train_feat": 0.15527179993011736,
+      "train_kl": 0.4166261366822503,
+      "train_weight": 1.0064466070045124,
+      "ramp": 0.2,
+      "val_accuracy": 0.9447115384615384,
+      "lr": 0.0
+    }
+  ]
+}

@@ -12,7 +12,7 @@ ROOT=Path(__file__).resolve().parent
 PYTHON=sys.executable
 DOMAINS=['Photo','Art_Painting','Cartoon','Sketch']
 SEEDS=[42,123,3407]
-GPUS=[int(value) for value in os.environ.get("SHIFTGUARD_GPUS", "0").split(",")]
+GPUS=[0,1,2]
 OUT=ROOT/'runs/corrected_ablation'
 LOG=ROOT/'logs/corrected_ablation'
 CONFIGS=[
@@ -46,7 +46,7 @@ def run_all(ts):
     h.write('COMMAND: '+' '.join(cmd(t))+'\n'); h.flush()
     rc=subprocess.run(cmd(t),cwd=ROOT,env=e,stdout=h,stderr=subprocess.STDOUT).returncode
    print(f'[gpu {gpu}] done rc={rc} min={(time.time()-start)/60:.1f} {stem(t)}',flush=True)
-   if rc:
+   if rc: 
     with lock: failures.append((stem(t),rc,str(p)))
    q.task_done()
  th=[threading.Thread(target=worker,args=(g,)) for g in GPUS]

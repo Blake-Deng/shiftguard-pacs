@@ -1,0 +1,2 @@
+target,method,run_name,model,seed,best_source_val,target_accuracy,target_loss,n_train,n_val,n_test,target_evaluations,elapsed_seconds,lambda_feat,lambda_kl,temperature,gate_tau,warmup_epochs
+Sketch,feat_kl,augmentation_M_13,resnet50,42,0.9812981298129813,0.8343089844744209,0.638569134952428,5153,909,3929,1,381.00669384002686,0.1,0.05,2.0,0.5,5

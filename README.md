@@ -1,164 +1,147 @@
-# ShiftGuard PACS corrected experiments
+# ShiftGuard controlled domain-generalization study
 
-This repository contains the corrected PACS leave-one-domain-out experiment code.
-It intentionally excludes the manuscript, author information, PACS images,
-model checkpoints, and pretrained weights.
+This repository is the reproducibility package for a controlled study of how
+much benefit remains after weak-to-strong consistency is separated from its
+direct strong-augmentation baseline. It contains code, immutable manifests,
+per-run JSON/CSV records, audit metadata, summary scripts, and figure code.
+It intentionally contains no manuscript, dataset images, or model checkpoints.
 
-## Dataset
+## Main evidence
 
-- Hugging Face: https://huggingface.co/datasets/flwrlabs/pacs
-- Identifier: flwrlabs/pacs
-- Size: 9,991 images, four domains, seven classes
+All formal comparisons use leave-one-domain-out evaluation. The training seed
+is the replicate; domains are averaged within each seed.
 
-Expected layout:
+| Dataset/backbone | Strong Aug. | Feature+KL | Paired delta (95% CI) |
+|---|---:|---:|---:|
+| PACS / ResNet-50 | 86.81 +/- 0.63 | 87.19 +/- 0.83 | +0.38 [-0.50, +1.27] |
+| VLCS / ResNet-50 | 76.51 +/- 1.31 | 76.34 +/- 0.82 | -0.18 [-1.64, +1.29] |
+| OfficeHome / ResNet-50 | 66.42 +/- 0.54 | 66.63 +/- 0.21 | +0.22 [-0.64, +1.07] |
+| PACS / ViT-S/16 | 85.78 +/- 1.12 | 86.22 +/- 0.50 | +0.44 [-0.73, +1.60] |
 
-    data/PACS/{photo,art_painting,cartoon,sketch}/
-      {dog,elephant,giraffe,guitar,horse,house,person}/*.jpg
+Every interval contains zero. These results support a small, heterogeneous
+residual effect, not universal or statistically reliable superiority.
 
-Download and validate:
+## Data
 
-    python -m pip install -r requirements.txt
-    python download_pacs_hf.py --output data/PACS
-    python check_pacs.py data/PACS
+Place datasets under these paths:
 
-Do not commit data/PACS. PACS remains subject to its original terms.
+```text
+data/PACS/{photo,art_painting,cartoon,sketch}/<class>/*
+data/VLCS/{Caltech101,LabelMe,SUN09,VOC2007}/<class>/*
+data/OfficeHome/{Art,Clipart,Product,Real World}/<class>/*
+```
+
+Sources used by the project:
+
+- PACS Hugging Face export: https://huggingface.co/datasets/flwrlabs/pacs
+- VLCS DomainBed mirror: https://drive.google.com/uc?id=1skwblH1_okBwxWxmRsp9_qi15hyPpxg8
+- OfficeHome official site: http://hemanthdv.org/OfficeHome-Dataset/
+- OfficeHome DomainBed mirror: https://drive.google.com/uc?id=1uY0pj7oFsjMxRwaD3Sxy0jgel0fsYXLC
+
+PACS can be exported directly:
+
+```bash
+pip install -r requirements.txt
+python download_pacs_hf.py --output data/PACS
+```
+
+Validate the uploaded VLCS and OfficeHome copies against the frozen exclusion
+policy and create inventories:
+
+```bash
+python validate_revision_dataset.py --dataset vlcs --root data/VLCS \
+  --inventory revision/vlcs_inventory.json --verify-images \
+  --exclusions revision/cross_dataset_exclusions.json
+python validate_revision_dataset.py --dataset officehome --root data/OfficeHome \
+  --inventory revision/officehome_inventory.json --verify-images \
+  --exclusions revision/cross_dataset_exclusions.json
+```
+
+The expected raw counts are PACS 9,991, VLCS 10,729, and OfficeHome 15,588.
+The committed inventory files contain the exact fingerprints used by the
+formal manifests.
 
 ## Environment
 
-Reported environment: PyTorch 2.11.0+cu128, torchvision 0.26.0+cu128,
-timm 1.0.29, CUDA 12.8, and NVIDIA RTX 5090.
+The recorded runs used Python with PyTorch 2.11.0, torchvision 0.26.0,
+timm 1.0.29, CUDA 12.8, and ImageNet-pretrained models. Install the dependencies
+in a fresh environment. Download and verify the exact ViT-S/16 weights with:
 
-    python -m venv .venv
-    source .venv/bin/activate
-    python -m pip install -U pip
-    python -m pip install -r requirements.txt
+```bash
+bash download_vit_weights.sh
+```
 
-ResNet-50 weights are downloaded by torchvision. For exact pretrained
-ViT-S/16:
+The expected SHA-256 is
+`545815b4e770d2fa6ca4b3ccba7c16b035e474354e52d17ca197ea4efecbf4d3`.
 
-    bash download_vit_weights.sh
+## Protocol
 
-The script writes weights/vit_small_patch16_224.npz and verifies SHA-256:
-545815b4e770d2fa6ca4b3ccba7c16b035e474354e52d17ca197ea4efecbf4d3.
+Formal seeds are `42, 123, 3407, 2026, 2027`. In every formal run:
 
-## Corrected implementation
+- the held-out target is absent from optimization, early stopping, and
+  checkpoint selection;
+- Strong Augmentation and Feature+KL share the split, views, transforms,
+  backbone, optimizer, schedule, batch size, epochs, and checkpoint rule;
+- target accuracy is evaluated once after the source-validation checkpoint is
+  fixed;
+- the formal Feature+KL configuration is `lambda_f=0.10`, `lambda_k=0.05`,
+  `T=2`, a five-epoch ramp, and RandAugment `N=2, M=9`.
 
-shiftguard_corrected.py supports:
+The original PACS configuration search pooled source-validation rankings over
+outer folds and was not fully nested. No strict nested experiment is claimed.
+The transferred Feature+KL configuration was frozen before the new VLCS,
+OfficeHome, added-seed, and ViT target results were examined.
 
-- aug: matched weak/strong classification baseline
-- kl: one-way weak-to-strong KL
-- feat: detached feature consistency
-- feat_kl: detached feature plus one-way KL
-- adaptive: Feature+KL with detached reliability weighting
+## Reproduce summaries
 
-Screening does not construct the target dataset. Formal evaluation restores
-the best source-validation checkpoint, then constructs and evaluates the
-target exactly once.
+The committed per-run results are under `runs/`; manifests and audit summaries
+are under `revision/`. Recompute all paper-level values and the 2x2 figure:
 
-Candidate objectives are selected once using mean source-validation accuracy
-pooled across all four leave-one-domain-out configurations. The selected
-configuration is then frozen for the formal runs. Thus each individual run
-excludes its held-out domain from optimization, early stopping, and checkpoint
-selection, while the benchmark-level configuration selection is cross-fold
-rather than fully nested domain-wise model selection. Target accuracy is not
-used to rank candidate configurations.
+```bash
+python skills/shiftguard-revision/scripts/summarize_revision.py
+python skills/shiftguard-revision/scripts/summarize_cross.py
+python skills/shiftguard-revision/scripts/summarize_vit.py
+python summarize_compact_sensitivity.py
+python summarize_revision_baselines.py
+python make_revision_evidence_figure.py
+```
 
-Single-run example:
+The last command writes `figures/fig2_revision_evidence.{pdf,png}`.
 
-    python shiftguard_corrected.py \
-      --data-root data/PACS \
-      --target Sketch \
-      --method feat_kl \
-      --run-name feature_plus_kl \
-      --model resnet50 \
-      --seed 42 \
-      --epochs 30 \
-      --batch-size 64 \
-      --lambda-feat 0.10 \
-      --lambda-kl 0.05 \
-      --temperature 2.0 \
-      --gate-tau 0.5 \
-      --warmup-epochs 5 \
-      --save-checkpoint \
-      --output runs/example
+## Run examples
 
-Smoke test:
+ResNet-50 PACS direct pair for a held-out Sketch target:
 
-    python shiftguard_corrected.py \
-      --data-root data/PACS --target Sketch --method aug \
-      --run-name smoke --seed 42 --epochs 1 --batch-size 16 \
-      --workers 2 --no-pretrained --output runs/smoke
+```bash
+python shiftguard_corrected.py --data-root data/PACS --target Sketch \
+  --method aug --run-name strong_aug --model resnet50 --seed 42 \
+  --epochs 30 --batch-size 64 --lr 0.0003 --weight-decay 0.0001 \
+  --output runs/reproduction/strong_aug --save-checkpoint
 
-## Experiment order
+python shiftguard_corrected.py --data-root data/PACS --target Sketch \
+  --method feat_kl --run-name feature_plus_kl --model resnet50 --seed 42 \
+  --epochs 30 --batch-size 64 --lr 0.0003 --weight-decay 0.0001 \
+  --lambda-feat 0.10 --lambda-kl 0.05 --temperature 2 \
+  --warmup-epochs 5 --output runs/reproduction/feature_plus_kl \
+  --save-checkpoint
+```
 
-One GPU is the default. To select GPUs:
+The frozen matrix launchers and their manifest generators are in
+`skills/shiftguard-revision/scripts/`. Run their `--dry-run` modes first.
+MixStyle and SWAD launchers are `run_mixstyle_matrix.py` and
+`run_swad_matrix.py`; sensitivity is `run_compact_sensitivity.py`.
 
-    export SHIFTGUARD_GPUS=0
+## Baseline disclosure
 
-or:
+MixStyle uses the official operation with `p=0.5`, `alpha=0.1`, inserted after
+ResNet layers 1 and 2. SWAD is a source-only epoch-level adaptation of the
+official LossValley rule (`n_converge=3`, `n_tolerance=6`,
+`tolerance_ratio=0.3`). It is not an unmodified official DomainBed launcher.
+The exact upstream source files, licenses, and hashes are included under
+`third_party/` and `revision/baseline_source_hashes.sha256`.
 
-    export SHIFTGUARD_GPUS=0,1,2
+## Sensitivity disclosure
 
-1. Source-only screening, formal ResNet, and exact ViT-S/16:
-
-    python run_corrected_pipeline.py
-
-2. Four variants x four targets x three seeds:
-
-    python run_corrected_ablation.py
-
-3. After ablation checkpoints exist, Sketch corruption robustness:
-
-    bash run_robustness_corrected.sh
-
-## Baseline context
-
-baselines contains the ERM, Mixup, and source-domain CORAL implementations
-used for contextual comparisons.
-
-Mixup:
-
-    python baselines/shiftguard_exp.py \
-      --data-root data/PACS --target Sketch --method mixup \
-      --model resnet50 --seed 42 --epochs 30 --output runs/mixup
-
-Source-only CORAL:
-
-    python baselines/coral_exp.py \
-      --data-root data/PACS --target Sketch --method coral \
-      --model resnet50 --seed 42 --epochs 30 \
-      --lambda-feat 0.5 --output runs/coral
-
-CORAL aligns covariance among source domains only.
-
-## Reference results
-
-reference_results includes every lightweight per-run JSON record:
-
-- corrected_screening: 24 screening jobs with no target evaluation
-- erm: 12 runs
-- mixup: 12 runs
-- coral: 12 source-only CORAL runs
-- corrected_ablation: 48 runs and summary
-- corrected_formal: 12 runs and summary
-- corrected_vit: 24 runs and summary
-- corrected_robustness: 150 evaluations
-
-Macro standard deviation is calculated after averaging four domains within
-each seed, then taking sample standard deviation across three seed macros.
-
-## Interpretation
-
-Strong Augmentation: 87.20 +/- 0.16 percent.
-Feature+KL: 87.46 +/- 1.01 percent, a descriptive +0.26 point difference.
-Adaptive: 86.93 +/- 1.28 percent and not uniformly better.
-
-Do not claim significance from four domains or treat corruption severity
-levels as independent training runs.
-
-## Full audit records
-
-See RECORDS.md for the location and expected count of every published record.
-Recompute the JSON-derived per-domain and seed-level macro statistics with:
-
-    python summarize_reference_results.py
+Sensitivity is a predeclared, descriptive single-seed study using seed 42 and
+all four PACS outer targets. It varies one factor at a time and was not used to
+retune the formal configuration. See `revision/SENSITIVITY_PROTOCOL_LOCK.md`.

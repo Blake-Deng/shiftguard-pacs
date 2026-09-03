@@ -1,0 +1,2 @@
+dataset,target,method,run_name,model,seed,best_source_val,target_accuracy,target_loss,n_train,n_val,n_test,target_evaluations,elapsed_seconds
+officehome,Clipart,strong_aug,strong_aug,resnet50,2027,0.8686087990487514,0.46918671248568156,3.2382966752177933,9540,1682,4365,1,1193.230325460434

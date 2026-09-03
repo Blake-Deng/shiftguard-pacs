@@ -1,0 +1,2 @@
+dataset,target,method,run_name,model,seed,best_source_val,target_accuracy,target_loss,n_train,n_val,n_test,target_evaluations,elapsed_seconds
+officehome,Real_World,feature_plus_kl,feature_plus_kl,resnet50,2026,0.857566765578635,0.7849437686481524,1.1292308078382385,9545,1685,4357,1,792.6772353649139

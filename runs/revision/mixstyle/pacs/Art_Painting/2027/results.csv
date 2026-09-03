@@ -1,0 +1,2 @@
+dataset,target,method,run_name,model,seed,best_source_val,target_accuracy,target_loss,n_train,n_val,n_test,target_evaluations,elapsed_seconds
+pacs,Art_Painting,mixstyle,mixstyle,resnet50,2027,0.9764903442485307,0.8349609375,0.6379741363925859,6752,1191,2048,1,414.5895290374756

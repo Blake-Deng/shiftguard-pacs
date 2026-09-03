@@ -1,0 +1,2 @@
+target,method,run_name,model,seed,best_source_val,target_accuracy,target_loss,n_train,n_val,n_test,target_evaluations,elapsed_seconds,lambda_feat,lambda_kl,temperature,gate_tau,warmup_epochs
+Photo,feat_kl,lambda_f_0p20,resnet50,42,0.9815705128205128,0.9610778443113772,0.14345463373557737,7073,1248,1670,1,989.5541508197784,0.2,0.05,2.0,0.5,5

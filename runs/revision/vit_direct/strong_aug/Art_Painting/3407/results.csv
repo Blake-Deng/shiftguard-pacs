@@ -1,0 +1,2 @@
+target,method,run_name,model,seed,best_source_val,target_accuracy,target_loss,n_train,n_val,n_test,target_evaluations,elapsed_seconds,lambda_feat,lambda_kl,temperature,gate_tau,warmup_epochs
+Art_Painting,aug,strong_aug,vit-small,3407,0.9815281276238456,0.84912109375,0.5981679147807881,6752,1191,2048,1,475.28145480155945,0.0,0.0,2.0,0.5,5

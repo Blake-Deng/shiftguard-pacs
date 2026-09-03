@@ -1,0 +1,2 @@
+dataset,target,method,run_name,model,seed,best_source_val,target_accuracy,target_loss,n_train,n_val,n_test,target_evaluations,elapsed_seconds
+vlcs,VOC2007,erm,erm,resnet50,3407,0.8392370572207084,0.7117890995260664,1.4863145614122328,6248,1101,3376,1,690.3357357978821

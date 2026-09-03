@@ -1,0 +1,2 @@
+dataset,target,method,run_name,model,seed,best_source_val,target_accuracy,target_loss,n_train,n_val,n_test,target_evaluations,elapsed_seconds
+pacs,Sketch,swad,swad,resnet50,123,0.9757975797579758,0.7951132603715958,0.7332554110367354,5153,909,3929,1,241.33259463310242

@@ -1,0 +1,2 @@
+target,method,run_name,model,seed,best_source_val,target_accuracy,target_loss,n_train,n_val,n_test,target_evaluations,elapsed_seconds,lambda_feat,lambda_kl,temperature,gate_tau,warmup_epochs
+Photo,aug,strong_aug,vit-small,2026,0.9711538461538461,0.9634730538922156,0.17203123344472457,7073,1248,1670,1,500.0816764831543,0.0,0.0,2.0,0.5,5

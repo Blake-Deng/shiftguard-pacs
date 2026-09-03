@@ -1,0 +1,2 @@
+target,method,run_name,model,seed,best_source_val,target_accuracy,target_loss,n_train,n_val,n_test,target_evaluations,elapsed_seconds,lambda_feat,lambda_kl,temperature,gate_tau,warmup_epochs
+Photo,aug,smoke_vit_preflight,vit-small,42,0.9447115384615384,,,7073,1248,0,0,19.933326721191406,0.0,0.0,2.0,0.5,5

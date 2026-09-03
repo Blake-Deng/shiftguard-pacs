@@ -1,0 +1,2 @@
+target,method,run_name,model,seed,best_source_val,target_accuracy,target_loss,n_train,n_val,n_test,target_evaluations,elapsed_seconds,lambda_feat,lambda_kl,temperature,gate_tau,warmup_epochs
+Cartoon,aug,strong_aug,vit-small,123,0.9729493891797557,0.8075938566552902,0.8606664335463234,6501,1146,2344,1,463.95066142082214,0.0,0.0,2.0,0.5,5

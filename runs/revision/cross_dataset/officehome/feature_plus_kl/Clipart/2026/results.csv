@@ -1,0 +1,2 @@
+dataset,target,method,run_name,model,seed,best_source_val,target_accuracy,target_loss,n_train,n_val,n_test,target_evaluations,elapsed_seconds
+officehome,Clipart,feature_plus_kl,feature_plus_kl,resnet50,2026,0.882282996432818,0.47124856815578464,3.6108298885043952,9540,1682,4365,1,1210.9452021121979

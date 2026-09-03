@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Corrected ShiftGuard experiments with source-validation checkpoint selection.
+"""Corrected ShiftGuard experiments with target-blind source validation.
 
 Screening does not enumerate or load target images. Formal evaluation restores
 one source-validation-selected checkpoint, then constructs and evaluates the
@@ -29,6 +29,8 @@ DOMAINS = ("Photo", "Art_Painting", "Cartoon", "Sketch")
 EXTENSIONS = {".jpg", ".jpeg", ".png", ".bmp"}
 IMAGENET_MEAN = (0.485, 0.456, 0.406)
 IMAGENET_STD = (0.229, 0.224, 0.225)
+TIMM_VIT_MEAN = (0.5, 0.5, 0.5)
+TIMM_VIT_STD = (0.5, 0.5, 0.5)
 
 
 def seed_everything(seed: int) -> None:
@@ -111,28 +113,38 @@ class PACSDataset(Dataset):
         return weak, strong, label
 
 
-def make_transforms(image_size: int):
+def make_transforms(image_size: int, preprocessing: str, augmentation_m: int = 9):
+    if preprocessing == "legacy_imagenet":
+        mean, std = IMAGENET_MEAN, IMAGENET_STD
+        interpolation = transforms.InterpolationMode.BILINEAR
+        evaluation_resize = 256
+    elif preprocessing == "timm_vit_standard":
+        mean, std = TIMM_VIT_MEAN, TIMM_VIT_STD
+        interpolation = transforms.InterpolationMode.BICUBIC
+        evaluation_resize = int(image_size / 0.9)
+    else:
+        raise ValueError(f"Unknown preprocessing profile: {preprocessing}")
     weak = transforms.Compose([
-        transforms.RandomResizedCrop(image_size, scale=(0.7, 1.0)),
+        transforms.RandomResizedCrop(image_size, scale=(0.7, 1.0), interpolation=interpolation),
         transforms.RandomHorizontalFlip(),
         transforms.ToTensor(),
-        transforms.Normalize(IMAGENET_MEAN, IMAGENET_STD),
+        transforms.Normalize(mean, std),
     ])
     strong = transforms.Compose([
-        transforms.RandomResizedCrop(image_size, scale=(0.5, 1.0)),
+        transforms.RandomResizedCrop(image_size, scale=(0.5, 1.0), interpolation=interpolation),
         transforms.RandomHorizontalFlip(),
-        transforms.RandAugment(num_ops=2, magnitude=9),
+        transforms.RandAugment(num_ops=2, magnitude=augmentation_m),
         transforms.ColorJitter(0.4, 0.4, 0.4, 0.1),
         transforms.RandomGrayscale(p=0.1),
         transforms.GaussianBlur(kernel_size=23, sigma=(0.1, 2.0)),
         transforms.ToTensor(),
-        transforms.Normalize(IMAGENET_MEAN, IMAGENET_STD),
+        transforms.Normalize(mean, std),
     ])
     evaluation = transforms.Compose([
-        transforms.Resize(256),
+        transforms.Resize(evaluation_resize, interpolation=interpolation, antialias=True),
         transforms.CenterCrop(image_size),
         transforms.ToTensor(),
-        transforms.Normalize(IMAGENET_MEAN, IMAGENET_STD),
+        transforms.Normalize(mean, std),
     ])
     return weak, strong, evaluation
 
@@ -214,7 +226,7 @@ def run(args):
     seed_everything(args.seed)
     started = time.time()
     device = torch.device(args.device if args.device else ("cuda" if torch.cuda.is_available() else "cpu"))
-    weak_tf, strong_tf, eval_tf = make_transforms(args.image_size)
+    weak_tf, strong_tf, eval_tf = make_transforms(args.image_size, args.preprocessing, args.augmentation_m)
     train_samples, val_samples, class_to_idx = collect_source_samples(
         Path(args.data_root), args.target, args.seed, args.val_fraction
     )
@@ -337,6 +349,9 @@ def run(args):
             "weight_min": args.weight_min,
             "weight_max": args.weight_max,
             "warmup_epochs": args.warmup_epochs,
+            "preprocessing": args.preprocessing,
+            "augmentation_N": 2,
+            "augmentation_M": args.augmentation_m,
         },
         "history": history,
     }
@@ -377,12 +392,19 @@ def parse_args():
     parser.add_argument("--batch-size", type=int, default=64)
     parser.add_argument("--workers", type=int, default=min(8, os.cpu_count() or 1))
     parser.add_argument("--image-size", type=int, default=224)
+    parser.add_argument(
+        "--preprocessing",
+        choices=["legacy_imagenet", "timm_vit_standard"],
+        default="legacy_imagenet",
+        help="Explicit preprocessing profile; the default preserves all historical runs.",
+    )
     parser.add_argument("--val-fraction", type=float, default=0.15)
     parser.add_argument("--lr", type=float, default=3e-4)
     parser.add_argument("--weight-decay", type=float, default=1e-4)
     parser.add_argument("--lambda-feat", type=float, default=0.05)
     parser.add_argument("--lambda-kl", type=float, default=0.05)
     parser.add_argument("--temperature", type=float, default=2.0)
+    parser.add_argument("--augmentation-m", type=int, default=9)
     parser.add_argument("--gate-tau", type=float, default=0.5)
     parser.add_argument("--weight-min", type=float, default=0.5)
     parser.add_argument("--weight-max", type=float, default=2.0)

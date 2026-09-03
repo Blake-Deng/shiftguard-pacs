@@ -1,0 +1,2 @@
+dataset,target,method,run_name,model,seed,best_source_val,target_accuracy,target_loss,n_train,n_val,n_test,target_evaluations,elapsed_seconds
+vlcs,Caltech101,mixstyle,mixstyle,resnet50,123,0.8173352435530086,0.9279151943462898,0.25414787664591554,7914,1396,1415,1,744.4258427619934

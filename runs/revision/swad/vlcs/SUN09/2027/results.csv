@@ -1,0 +1,2 @@
+dataset,target,method,run_name,model,seed,best_source_val,target_accuracy,target_loss,n_train,n_val,n_test,target_evaluations,elapsed_seconds
+vlcs,SUN09,swad,swad,resnet50,2027,0.8566308243727598,0.7647775746496039,0.727378884297475,6327,1116,3282,1,680.2060050964355

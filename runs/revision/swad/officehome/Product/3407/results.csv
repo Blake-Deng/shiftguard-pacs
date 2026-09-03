@@ -1,0 +1,2 @@
+dataset,target,method,run_name,model,seed,best_source_val,target_accuracy,target_loss,n_train,n_val,n_test,target_evaluations,elapsed_seconds
+officehome,Product,swad,swad,resnet50,3407,0.8022700119474313,0.751971164676729,1.1568608037199246,9474,1674,4439,1,614.0534718036652

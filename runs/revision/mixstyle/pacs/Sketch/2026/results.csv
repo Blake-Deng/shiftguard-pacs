@@ -1,0 +1,2 @@
+dataset,target,method,run_name,model,seed,best_source_val,target_accuracy,target_loss,n_train,n_val,n_test,target_evaluations,elapsed_seconds
+pacs,Sketch,mixstyle,mixstyle,resnet50,2026,0.9801980198019802,0.7358106388393993,0.848568248700234,5153,909,3929,1,296.15000772476196

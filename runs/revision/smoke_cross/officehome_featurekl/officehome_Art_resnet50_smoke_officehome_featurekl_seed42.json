@@ -1,0 +1,42 @@
+{
+  "dataset": "officehome",
+  "target": "Art",
+  "source_domains": [
+    "Clipart",
+    "Product",
+    "Real_World"
+  ],
+  "method": "feature_plus_kl",
+  "run_name": "smoke_officehome_featurekl",
+  "model": "resnet50",
+  "seed": 42,
+  "best_source_val": 0.7489878542510121,
+  "target_accuracy": null,
+  "target_loss": null,
+  "n_train": 11185,
+  "n_val": 1976,
+  "n_test": 0,
+  "target_evaluations": 0,
+  "elapsed_seconds": 39.916297912597656,
+  "config": {
+    "val_fraction": 0.15,
+    "lambda_feat": 0.1,
+    "lambda_kl": 0.05,
+    "temperature": 2.0,
+    "warmup_epochs": 5,
+    "augmentation_M": 9,
+    "preprocessing": "legacy_imagenet"
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 1.6716303760292885,
+      "train_cls": 1.6635541038951656,
+      "train_feat": 0.1747568623087872,
+      "train_kl": 0.4581138955953734,
+      "ramp": 0.2,
+      "val_accuracy": 0.7489878542510121,
+      "lr": 0.0
+    }
+  ]
+}

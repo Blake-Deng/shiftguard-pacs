@@ -1,0 +1,44 @@
+{
+  "dataset": "vlcs",
+  "target": "Caltech101",
+  "source_domains": [
+    "LabelMe",
+    "SUN09",
+    "VOC2007"
+  ],
+  "method": "erm",
+  "run_name": "smoke_v11_vlcs_erm",
+  "model": "resnet50",
+  "seed": 42,
+  "best_source_val": 0.8058739255014327,
+  "target_accuracy": null,
+  "target_loss": null,
+  "n_train": 7914,
+  "n_val": 1396,
+  "n_test": 0,
+  "target_evaluations": 0,
+  "elapsed_seconds": 25.037601947784424,
+  "config": {
+    "val_fraction": 0.15,
+    "lambda_feat": 0.0,
+    "lambda_kl": 0.0,
+    "temperature": 2.0,
+    "warmup_epochs": 5,
+    "augmentation_M": 9,
+    "preprocessing": "legacy_imagenet",
+    "exclusion_policy": "cross-dataset-corrupt-exclusion-v1.0",
+    "excluded_images": 4
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.6194164830494703,
+      "train_cls": 0.6194164830494703,
+      "train_feat": 0.0,
+      "train_kl": 0.0,
+      "ramp": 0.2,
+      "val_accuracy": 0.8058739255014327,
+      "lr": 0.0
+    }
+  ]
+}

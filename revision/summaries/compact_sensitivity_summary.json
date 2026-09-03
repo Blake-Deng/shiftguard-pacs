@@ -1,0 +1,268 @@
+{
+  "protocol_version": "shiftguard-compact-sensitivity-v1.0",
+  "scope": "descriptive single-seed OAT sensitivity; not used for configuration selection",
+  "seed": 42,
+  "domains": [
+    "Photo",
+    "Art_Painting",
+    "Cartoon",
+    "Sketch"
+  ],
+  "default_configuration": {
+    "lambda_f": 0.1,
+    "lambda_k": 0.05,
+    "temperature": 2.0,
+    "augmentation_N": 2,
+    "augmentation_M": 9
+  },
+  "sweeps": {
+    "lambda_f": [
+      {
+        "sweep": "lambda_f",
+        "value": "0.05",
+        "source_validation_macro": 98.196090394667,
+        "target_macro": 88.35818212410155,
+        "target_by_domain": {
+          "Photo": 96.88622754491017,
+          "Art_Painting": 83.935546875,
+          "Cartoon": 86.04948805460751,
+          "Sketch": 86.56146602188852
+        },
+        "source_validation_by_fold": {
+          "Photo": 97.99679487179486,
+          "Art_Painting": 97.48110831234257,
+          "Cartoon": 98.51657940663176,
+          "Sketch": 98.78987898789879
+        },
+        "seed": 42,
+        "reused_default": false
+      },
+      {
+        "sweep": "lambda_f",
+        "value": "0.10",
+        "source_validation_macro": 97.98408236177453,
+        "target_macro": 86.35159748634905,
+        "target_by_domain": {
+          "Photo": 96.40718562874252,
+          "Art_Painting": 80.37109375,
+          "Cartoon": 83.87372013651877,
+          "Sketch": 84.75439043013489
+        },
+        "source_validation_by_fold": {
+          "Photo": 98.4775641025641,
+          "Art_Painting": 97.31318219983207,
+          "Cartoon": 97.90575916230367,
+          "Sketch": 98.23982398239825
+        },
+        "seed": 42,
+        "reused_default": true
+      },
+      {
+        "sweep": "lambda_f",
+        "value": "0.20",
+        "source_validation_macro": 97.9274176546967,
+        "target_macro": 87.5205264858503,
+        "target_by_domain": {
+          "Photo": 96.10778443113772,
+          "Art_Painting": 84.228515625,
+          "Cartoon": 83.48976109215018,
+          "Sketch": 86.25604479511327
+        },
+        "source_validation_by_fold": {
+          "Photo": 98.15705128205127,
+          "Art_Painting": 97.14525608732157,
+          "Cartoon": 98.1675392670157,
+          "Sketch": 98.23982398239825
+        },
+        "seed": 42,
+        "reused_default": false
+      }
+    ],
+    "lambda_k": [
+      {
+        "sweep": "lambda_k",
+        "value": "0.025",
+        "source_validation_macro": 97.976262076361,
+        "target_macro": 87.36089224515615,
+        "target_by_domain": {
+          "Photo": 96.10778443113772,
+          "Art_Painting": 84.423828125,
+          "Cartoon": 83.06313993174061,
+          "Sketch": 85.84881649274625
+        },
+        "source_validation_by_fold": {
+          "Photo": 97.99679487179486,
+          "Art_Painting": 96.97732997481108,
+          "Cartoon": 98.69109947643979,
+          "Sketch": 98.23982398239825
+        },
+        "seed": 42,
+        "reused_default": false
+      },
+      {
+        "sweep": "lambda_k",
+        "value": "0.05",
+        "source_validation_macro": 97.98408236177453,
+        "target_macro": 86.35159748634905,
+        "target_by_domain": {
+          "Photo": 96.40718562874252,
+          "Art_Painting": 80.37109375,
+          "Cartoon": 83.87372013651877,
+          "Sketch": 84.75439043013489
+        },
+        "source_validation_by_fold": {
+          "Photo": 98.4775641025641,
+          "Art_Painting": 97.31318219983207,
+          "Cartoon": 97.90575916230367,
+          "Sketch": 98.23982398239825
+        },
+        "seed": 42,
+        "reused_default": true
+      },
+      {
+        "sweep": "lambda_k",
+        "value": "0.10",
+        "source_validation_macro": 98.0999276106515,
+        "target_macro": 86.9144977994581,
+        "target_by_domain": {
+          "Photo": 96.88622754491017,
+          "Art_Painting": 84.228515625,
+          "Cartoon": 84.25767918088737,
+          "Sketch": 82.28556884703487
+        },
+        "source_validation_by_fold": {
+          "Photo": 97.99679487179486,
+          "Art_Painting": 97.22921914357683,
+          "Cartoon": 98.60383944153578,
+          "Sketch": 98.56985698569856
+        },
+        "seed": 42,
+        "reused_default": false
+      }
+    ],
+    "temperature": [
+      {
+        "sweep": "temperature",
+        "value": "1",
+        "source_validation_macro": 98.07253657318438,
+        "target_macro": 87.26239826206812,
+        "target_by_domain": {
+          "Photo": 96.40718562874252,
+          "Art_Painting": 84.814453125,
+          "Cartoon": 83.40443686006826,
+          "Sketch": 84.42351743446169
+        },
+        "source_validation_by_fold": {
+          "Photo": 97.99679487179486,
+          "Art_Painting": 97.31318219983207,
+          "Cartoon": 98.08027923211169,
+          "Sketch": 98.89988998899891
+        },
+        "seed": 42,
+        "reused_default": false
+      },
+      {
+        "sweep": "temperature",
+        "value": "2",
+        "source_validation_macro": 97.98408236177453,
+        "target_macro": 86.35159748634905,
+        "target_by_domain": {
+          "Photo": 96.40718562874252,
+          "Art_Painting": 80.37109375,
+          "Cartoon": 83.87372013651877,
+          "Sketch": 84.75439043013489
+        },
+        "source_validation_by_fold": {
+          "Photo": 98.4775641025641,
+          "Art_Painting": 97.31318219983207,
+          "Cartoon": 97.90575916230367,
+          "Sketch": 98.23982398239825
+        },
+        "seed": 42,
+        "reused_default": true
+      },
+      {
+        "sweep": "temperature",
+        "value": "4",
+        "source_validation_macro": 97.98516482547247,
+        "target_macro": 87.525013532271,
+        "target_by_domain": {
+          "Photo": 96.04790419161677,
+          "Art_Painting": 86.1328125,
+          "Cartoon": 83.06313993174061,
+          "Sketch": 84.85619750572666
+        },
+        "source_validation_by_fold": {
+          "Photo": 97.99679487179486,
+          "Art_Painting": 97.22921914357683,
+          "Cartoon": 98.25479930191972,
+          "Sketch": 98.45984598459846
+        },
+        "seed": 42,
+        "reused_default": false
+      }
+    ],
+    "augmentation_M": [
+      {
+        "sweep": "augmentation_M",
+        "value": "5",
+        "source_validation_macro": 97.95340638376692,
+        "target_macro": 86.18588036596833,
+        "target_by_domain": {
+          "Photo": 95.62874251497006,
+          "Art_Painting": 83.251953125,
+          "Cartoon": 79.47952218430035,
+          "Sketch": 86.38330363960294
+        },
+        "source_validation_by_fold": {
+          "Photo": 98.07692307692307,
+          "Art_Painting": 97.48110831234257,
+          "Cartoon": 97.90575916230367,
+          "Sketch": 98.34983498349835
+        },
+        "seed": 42,
+        "reused_default": false
+      },
+      {
+        "sweep": "augmentation_M",
+        "value": "9",
+        "source_validation_macro": 97.98408236177453,
+        "target_macro": 86.35159748634905,
+        "target_by_domain": {
+          "Photo": 96.40718562874252,
+          "Art_Painting": 80.37109375,
+          "Cartoon": 83.87372013651877,
+          "Sketch": 84.75439043013489
+        },
+        "source_validation_by_fold": {
+          "Photo": 98.4775641025641,
+          "Art_Painting": 97.31318219983207,
+          "Cartoon": 97.90575916230367,
+          "Sketch": 98.23982398239825
+        },
+        "seed": 42,
+        "reused_default": true
+      },
+      {
+        "sweep": "augmentation_M",
+        "value": "13",
+        "source_validation_macro": 98.00391001195896,
+        "target_macro": 86.32317720909246,
+        "target_by_domain": {
+          "Photo": 96.52694610778443,
+          "Art_Painting": 83.935546875,
+          "Cartoon": 81.39931740614334,
+          "Sketch": 83.43089844744209
+        },
+        "source_validation_by_fold": {
+          "Photo": 98.23717948717949,
+          "Art_Painting": 97.48110831234257,
+          "Cartoon": 98.1675392670157,
+          "Sketch": 98.12981298129813
+        },
+        "seed": 42,
+        "reused_default": false
+      }
+    ]
+  }
+}

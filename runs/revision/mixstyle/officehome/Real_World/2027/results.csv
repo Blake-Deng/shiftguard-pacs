@@ -1,0 +1,2 @@
+dataset,target,method,run_name,model,seed,best_source_val,target_accuracy,target_loss,n_train,n_val,n_test,target_evaluations,elapsed_seconds
+officehome,Real_World,mixstyle,mixstyle,resnet50,2027,0.8100890207715133,0.7686481523984393,1.0693608620912622,9545,1685,4357,1,484.76916217803955

@@ -1,0 +1,2 @@
+dataset,target,method,run_name,model,seed,best_source_val,target_accuracy,target_loss,n_train,n_val,n_test,target_evaluations,elapsed_seconds
+vlcs,SUN09,mixstyle,mixstyle,resnet50,2027,0.8494623655913979,0.6895185862279098,1.3930390359496723,6327,1116,3282,1,672.0401570796967

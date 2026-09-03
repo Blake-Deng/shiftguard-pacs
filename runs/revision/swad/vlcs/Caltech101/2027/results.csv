@@ -1,0 +1,2 @@
+dataset,target,method,run_name,model,seed,best_source_val,target_accuracy,target_loss,n_train,n_val,n_test,target_evaluations,elapsed_seconds
+vlcs,Caltech101,swad,swad,resnet50,2027,0.826647564469914,0.9462897526501767,0.17362557240620308,7914,1396,1415,1,739.7618374824524

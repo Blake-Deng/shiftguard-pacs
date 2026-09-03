@@ -1,0 +1,2 @@
+target,method,run_name,model,seed,best_source_val,target_accuracy,target_loss,n_train,n_val,n_test,target_evaluations,elapsed_seconds,lambda_feat,lambda_kl,temperature,gate_tau,warmup_epochs
+Art_Painting,adaptive,adaptive_005,resnet50,42,0.9756507136859782,,,6752,1191,0,0,474.05871772766113,0.05,0.05,2.0,0.5,5

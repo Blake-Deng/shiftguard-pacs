@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run pooled cross-fold screening, corrected ResNet formal runs, and ViT controls."""
+"""Run target-blind screening, corrected ResNet formal runs, and ViT controls."""
 from __future__ import annotations
 
 import csv
@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parent
 PYTHON = sys.executable
 DOMAINS = ["Photo", "Art_Painting", "Cartoon", "Sketch"]
 SEEDS = [42, 123, 3407]
-GPUS = [int(value) for value in os.environ.get("SHIFTGUARD_GPUS", "0").split(",")]
+GPUS = [0, 1, 2]
 LOG_ROOT = ROOT / "logs" / "corrected"
 RUN_ROOT = ROOT / "runs"
 
@@ -215,7 +215,7 @@ def summarize_results(root, destination):
     records = []
     for path in root.rglob("*.json"):
         result = json.loads(path.read_text())
-        if isinstance(result, dict) and result.get("target_accuracy") is not None:
+        if result.get("target_accuracy") is not None:
             records.append(result)
     grouped = {}
     for result in records:

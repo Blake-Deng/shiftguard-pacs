@@ -1,0 +1,31 @@
+{
+  "policy_version": "cross-dataset-corrupt-exclusion-v1.0",
+  "frozen_at": "2026-09-02 before formal cross-dataset target evaluation",
+  "reason": "Files that fail a full PIL RGB decode are excluded deterministically; truncated-image loading is not enabled.",
+  "datasets": {
+    "vlcs": [
+      {
+        "path": "LabelMe/car/44b07a801b794b0ebadf75eabe761386.jpg",
+        "error": "image file is truncated (1525 bytes not processed)"
+      },
+      {
+        "path": "LabelMe/car/a4fc44181c584986888c78fea2c1d310.jpg",
+        "error": "image file is truncated (4038 bytes not processed)"
+      },
+      {
+        "path": "LabelMe/person/54acb3ec4dbc42d3bcff926091dbadd1.jpg",
+        "error": "image file is truncated (99 bytes not processed)"
+      },
+      {
+        "path": "LabelMe/person/7e457522cdcb4790b70f8b7eefb8e4b0.jpg",
+        "error": "image file is truncated (1477 bytes not processed)"
+      }
+    ],
+    "officehome": [
+      {
+        "path": "Art/Notebook/00003.jpg",
+        "error": "image file is truncated (0 bytes not processed)"
+      }
+    ]
+  }
+}

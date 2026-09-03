@@ -1,0 +1,2 @@
+dataset,target,method,run_name,model,seed,best_source_val,target_accuracy,target_loss,n_train,n_val,n_test,target_evaluations,elapsed_seconds
+vlcs,LabelMe,erm,erm,resnet50,42,0.8777869529314616,0.6217948717948718,2.738018892896481,6862,1211,2652,1,401.69456219673157

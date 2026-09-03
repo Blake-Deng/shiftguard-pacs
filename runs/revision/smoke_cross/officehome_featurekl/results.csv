@@ -1,0 +1,2 @@
+dataset,target,method,run_name,model,seed,best_source_val,target_accuracy,target_loss,n_train,n_val,n_test,target_evaluations,elapsed_seconds
+officehome,Art,feature_plus_kl,smoke_officehome_featurekl,resnet50,42,0.7489878542510121,,,11185,1976,0,0,39.916297912597656
