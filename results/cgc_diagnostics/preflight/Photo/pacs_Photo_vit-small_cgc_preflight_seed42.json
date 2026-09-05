@@ -1,0 +1,46 @@
+{
+  "dataset": "pacs",
+  "target": "Photo",
+  "seed": 42,
+  "method": "cgc",
+  "model": "vit-small",
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.5100267150185325,
+      "train_cls": 0.5043579132719473,
+      "train_feat": 0.14920970120213248,
+      "train_kl": 0.408615010434931,
+      "ramp": 0.2,
+      "source_val_accuracy": 0.9447115384615384,
+      "source_val_loss": 0.1653994695068552,
+      "lr": 0.0,
+      "epoch_seconds": 33.38318347930908,
+      "mean_a_feat": 0.10333236598281391,
+      "median_a_feat": 0.09664598107337952,
+      "mean_a_kl": 0.3400816969570852,
+      "median_a_kl": 0.8316738605499268,
+      "feature_conflict_rate": 0.22286931818181818,
+      "kl_conflict_rate": 0.3237215909090909,
+      "feature_keep_rate": 0.7771306818181818,
+      "kl_keep_rate": 0.6762784090909091,
+      "source_domain_conflict_rates": {
+        "Art_Painting": {
+          "feature": 0.15905147484094853,
+          "kl": 0.23828802776171198,
+          "count": 1729
+        },
+        "Cartoon": {
+          "feature": 0.1781029263370333,
+          "kl": 0.26185671039354186,
+          "count": 1982
+        },
+        "Sketch": {
+          "feature": 0.2826674677080204,
+          "kl": 0.4049264043256233,
+          "count": 3329
+        }
+      }
+    }
+  ]
+}

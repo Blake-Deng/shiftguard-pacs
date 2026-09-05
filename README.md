@@ -1,29 +1,50 @@
-# ShiftGuard controlled domain-generalization study
+# ShiftGuard-CGC reproducibility package
 
-This repository is the reproducibility package for a controlled study of how
-much benefit remains after weak-to-strong consistency is separated from its
-direct strong-augmentation baseline. It contains code, immutable manifests,
-per-run JSON/CSV records, audit metadata, summary scripts, and figure code.
-It intentionally contains no manuscript, dataset images, or model checkpoints.
+This repository contains code, immutable protocols, manifests, per-run results,
+and summary utilities for source-only component-wise conflict-gated consistency
+(CGC) in visual domain generalization. It intentionally contains no manuscript,
+LaTeX source, paper PDF, dataset images, or model checkpoints.
 
-## Main evidence
+## Included artifacts
 
-All formal comparisons use leave-one-domain-out evaluation. The training seed
-is the replicate; domains are averaged within each seed.
+- `cgc_experiment.py`: matched Strong Augmentation, Feature+KL, CGC, Mean
+  Teacher, and gate ablations.
+- `run_cgc_complete_queue.py`: restartable multi-GPU queue and result audit.
+- `summarize_cgc_results.py`: five-seed statistics, NTR, nested selection,
+  mechanism diagnostics, and efficiency summaries.
+- `plot_cgc_evidence.py`: quantitative 2x2 result visualization.
+- `summarize_cgc_results_offline.py`: checkpoint-free summary entry point that
+  reuses the committed inference-latency snapshot while recomputing all other
+  values from per-run JSON.
+- `revision/CGC_PROTOCOL_LOCK.md`: protocol frozen before formal target results.
+- `revision/cgc_v2_manifest.csv`: all 232 new jobs and completion records.
+- `runs/cgc_v2/`: 243 new per-run JSON files, without checkpoints.
+- `results/cgc_diagnostics/`: 143 epoch-level diagnostic JSON files.
+- Prior control JSON under `runs/revision/` and `runs/corrected_ablation/`,
+  required to recompute Strong Augmentation and Feature+KL comparisons.
 
-| Dataset/backbone | Strong Aug. | Feature+KL | Paired delta (95% CI) |
+## Recorded results
+
+Formal comparisons use seeds `42`, `123`, `3407`, `2026`, and `2027`. The
+training seed is the replicate; domains are averaged within each seed.
+
+| Method | PACS | VLCS | OfficeHome |
 |---|---:|---:|---:|
-| PACS / ResNet-50 | 86.81 +/- 0.63 | 87.19 +/- 0.83 | +0.38 [-0.50, +1.27] |
-| VLCS / ResNet-50 | 76.51 +/- 1.31 | 76.34 +/- 0.82 | -0.18 [-1.64, +1.29] |
-| OfficeHome / ResNet-50 | 66.42 +/- 0.54 | 66.63 +/- 0.21 | +0.22 [-0.64, +1.07] |
-| PACS / ViT-S/16 | 85.78 +/- 1.12 | 86.22 +/- 0.50 | +0.44 [-0.73, +1.60] |
+| Strong Augmentation | 86.81 +/- 0.63 | 76.51 +/- 1.31 | 66.42 +/- 0.54 |
+| Feature+KL | 87.19 +/- 0.83 | 76.34 +/- 0.82 | 66.63 +/- 0.21 |
+| CGC | 86.96 +/- 0.63 | 76.87 +/- 0.38 | 66.37 +/- 0.38 |
+| MixStyle | 83.77 +/- 0.96 | 75.39 +/- 1.33 | 64.34 +/- 0.54 |
+| SWAD (epoch) | 84.25 +/- 1.34 | 78.40 +/- 0.55 | 65.98 +/- 0.33 |
 
-Every interval contains zero. These results support a small, heterogeneous
-residual effect, not universal or statistically reliable superiority.
+CGC minus Strong Augmentation paired means and 95% t intervals are PACS
+`+0.15 [-0.46, +0.76]`, VLCS `+0.35 [-1.60, +2.31]`, OfficeHome
+`-0.04 [-1.02, +0.94]`, and PACS ViT-S/16 `-0.51 [-1.92, +0.91]` percentage
+points. All intervals contain zero. The aggregate NTR is 48.3% for Feature+KL
+and 45.0% for CGC. Strict nested PACS selection obtains `87.24 +/- 0.60`.
 
 ## Data
 
-Place datasets under these paths:
+Place datasets under:
 
 ```text
 data/PACS/{photo,art_painting,cartoon,sketch}/<class>/*
@@ -31,117 +52,78 @@ data/VLCS/{Caltech101,LabelMe,SUN09,VOC2007}/<class>/*
 data/OfficeHome/{Art,Clipart,Product,Real World}/<class>/*
 ```
 
-Sources used by the project:
+Dataset sources:
 
-- PACS Hugging Face export: https://huggingface.co/datasets/flwrlabs/pacs
+- PACS: https://huggingface.co/datasets/flwrlabs/pacs
 - VLCS DomainBed mirror: https://drive.google.com/uc?id=1skwblH1_okBwxWxmRsp9_qi15hyPpxg8
 - OfficeHome official site: http://hemanthdv.org/OfficeHome-Dataset/
 - OfficeHome DomainBed mirror: https://drive.google.com/uc?id=1uY0pj7oFsjMxRwaD3Sxy0jgel0fsYXLC
 
-PACS can be exported directly:
-
-```bash
-pip install -r requirements.txt
-python download_pacs_hf.py --output data/PACS
-```
-
-Validate the uploaded VLCS and OfficeHome copies against the frozen exclusion
-policy and create inventories:
-
-```bash
-python validate_revision_dataset.py --dataset vlcs --root data/VLCS \
-  --inventory revision/vlcs_inventory.json --verify-images \
-  --exclusions revision/cross_dataset_exclusions.json
-python validate_revision_dataset.py --dataset officehome --root data/OfficeHome \
-  --inventory revision/officehome_inventory.json --verify-images \
-  --exclusions revision/cross_dataset_exclusions.json
-```
-
-The expected raw counts are PACS 9,991, VLCS 10,729, and OfficeHome 15,588.
-The committed inventory files contain the exact fingerprints used by the
-formal manifests.
+Expected raw counts are PACS 9,991, VLCS 10,729, and OfficeHome 15,588. Exact
+inventories and the image-exclusion policy are under `revision/`. PACS can be
+exported with `python download_pacs_hf.py --output data/PACS`.
 
 ## Environment
 
-The recorded runs used Python with PyTorch 2.11.0, torchvision 0.26.0,
-timm 1.0.29, CUDA 12.8, and ImageNet-pretrained models. Install the dependencies
-in a fresh environment. Download and verify the exact ViT-S/16 weights with:
+Recorded versions are PyTorch 2.11.0, torchvision 0.26.0, timm 1.0.29, and
+CUDA 12.8. Install dependencies and the verified ViT weights with:
 
 ```bash
+pip install -r requirements.txt
 bash download_vit_weights.sh
 ```
 
-The expected SHA-256 is
-`545815b4e770d2fa6ca4b3ccba7c16b035e474354e52d17ca197ea4efecbf4d3`.
+## Target-isolation protocol
 
-## Protocol
+For every outer target, target images are absent from optimization, early
+stopping, checkpoint selection, and configuration selection. Formal JSON files
+record `target_evaluations = 1` only after checkpoint restoration. Strict nested
+screening records `target_evaluations = 0`, `target_accuracy = null`, and
+`n_test = 0`. CGC uses a fixed zero threshold and detached feature/KL masks.
+Matched methods share splits, views, backbone, optimizer, schedule, batch size,
+epochs, and checkpoint rule.
 
-Formal seeds are `42, 123, 3407, 2026, 2027`. In every formal run:
+## Verify the release
 
-- the held-out target is absent from optimization, early stopping, and
-  checkpoint selection;
-- Strong Augmentation and Feature+KL share the split, views, transforms,
-  backbone, optimizer, schedule, batch size, epochs, and checkpoint rule;
-- target accuracy is evaluated once after the source-validation checkpoint is
-  fixed;
-- the formal Feature+KL configuration is `lambda_f=0.10`, `lambda_k=0.05`,
-  `T=2`, a five-epoch ramp, and RandAugment `N=2, M=9`.
-
-The original PACS configuration search pooled source-validation rankings over
-outer folds and was not fully nested. No strict nested experiment is claimed.
-The transferred Feature+KL configuration was frozen before the new VLCS,
-OfficeHome, added-seed, and ViT target results were examined.
-
-## Reproduce summaries
-
-The committed per-run results are under `runs/`; manifests and audit summaries
-are under `revision/`. Recompute all paper-level values and the 2x2 figure:
+After installing dependencies:
 
 ```bash
-python skills/shiftguard-revision/scripts/summarize_revision.py
-python skills/shiftguard-revision/scripts/summarize_cross.py
-python skills/shiftguard-revision/scripts/summarize_vit.py
-python summarize_compact_sensitivity.py
-python summarize_revision_baselines.py
-python make_revision_evidence_figure.py
+python cgc_queue_status.py
+python summarize_cgc_results_offline.py
+python plot_cgc_evidence.py
 ```
 
-The last command writes `figures/fig2_revision_evidence.{pdf,png}`.
+Expected queue status is 232 complete and zero failed. Summaries are written to
+`revision/cgc_v2_summaries/`, and the plot is written to `figures/`.
 
-## Run examples
-
-ResNet-50 PACS direct pair for a held-out Sketch target:
+## Run one CGC experiment
 
 ```bash
-python shiftguard_corrected.py --data-root data/PACS --target Sketch \
-  --method aug --run-name strong_aug --model resnet50 --seed 42 \
-  --epochs 30 --batch-size 64 --lr 0.0003 --weight-decay 0.0001 \
-  --output runs/reproduction/strong_aug --save-checkpoint
-
-python shiftguard_corrected.py --data-root data/PACS --target Sketch \
-  --method feat_kl --run-name feature_plus_kl --model resnet50 --seed 42 \
-  --epochs 30 --batch-size 64 --lr 0.0003 --weight-decay 0.0001 \
+python cgc_experiment.py \
+  --dataset pacs --data-root data/PACS --target Sketch \
+  --method cgc --run-name reproduce_pacs_sketch_cgc_seed42 \
+  --model resnet50 --seed 42 --epochs 30 --batch-size 64 \
   --lambda-feat 0.10 --lambda-kl 0.05 --temperature 2 \
-  --warmup-epochs 5 --output runs/reproduction/feature_plus_kl \
+  --warmup-epochs 5 --augmentation-m 9 \
+  --exclusions revision/cross_dataset_exclusions.json \
+  --output runs/reproduction/pacs_sketch_cgc_seed42 \
+  --diagnostics-output results/reproduction/pacs_sketch_cgc_seed42 \
   --save-checkpoint
 ```
 
-The frozen matrix launchers and their manifest generators are in
-`skills/shiftguard-revision/scripts/`. Run their `--dry-run` modes first.
-MixStyle and SWAD launchers are `run_mixstyle_matrix.py` and
-`run_swad_matrix.py`; sensitivity is `run_compact_sensitivity.py`.
+The full queue launcher is restartable. Check it before launching new jobs:
+
+```bash
+python run_cgc_complete_queue.py --gpus 0,1,2 --workers-per-gpu 4 --dry-run
+```
 
 ## Baseline disclosure
 
-MixStyle uses the official operation with `p=0.5`, `alpha=0.1`, inserted after
-ResNet layers 1 and 2. SWAD is a source-only epoch-level adaptation of the
-official LossValley rule (`n_converge=3`, `n_tolerance=6`,
-`tolerance_ratio=0.3`). It is not an unmodified official DomainBed launcher.
-The exact upstream source files, licenses, and hashes are included under
-`third_party/` and `revision/baseline_source_hashes.sha256`.
+MixStyle uses `p=0.5`, `alpha=0.1` after ResNet layers 1 and 2. SWAD is a
+source-only epoch-level LossValley adaptation under the matched schedule, not
+an unmodified official DomainBed launcher. Upstream source, licenses, and
+hashes are retained under `third_party/` and `revision/`.
 
-## Sensitivity disclosure
-
-Sensitivity is a predeclared, descriptive single-seed study using seed 42 and
-all four PACS outer targets. It varies one factor at a time and was not used to
-retune the formal configuration. See `revision/SENSITIVITY_PROTOCOL_LOCK.md`.
+This repository preserves mixed and negative outcomes. It must not be used to
+claim statistically significant or universal superiority when paired intervals
+include zero.

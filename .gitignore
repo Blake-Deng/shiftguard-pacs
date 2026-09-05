@@ -8,3 +8,12 @@ __pycache__/
 .venv/
 figures/*.png
 figures/*.pdf
+*.tex
+*.aux
+*.bbl
+*.blg
+*.out
+*.pdf
+manuscript*
+paper*
+.DS_Store

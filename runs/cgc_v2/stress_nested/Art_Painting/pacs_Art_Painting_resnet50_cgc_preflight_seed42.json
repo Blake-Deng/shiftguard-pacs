@@ -1,0 +1,75 @@
+{
+  "protocol_version": "cgc-v2-zero-threshold-2026-09-04",
+  "dataset": "pacs",
+  "target": "Art_Painting",
+  "source_domains": [
+    "Photo",
+    "Sketch"
+  ],
+  "inner_validation_domain": "Cartoon",
+  "selection_protocol": "strict_nested_inner",
+  "method": "cgc",
+  "run_name": "cgc_preflight",
+  "model": "resnet50",
+  "seed": 42,
+  "best_source_val": 0.7252559726962458,
+  "checkpoint_epoch": 1,
+  "target_accuracy": null,
+  "target_loss": null,
+  "n_train": 5599,
+  "n_val": 2344,
+  "n_test": 0,
+  "target_evaluations": 0,
+  "elapsed_seconds": 29.819520473480225,
+  "peak_gpu_memory_bytes": 6095989248,
+  "config": {
+    "val_fraction": 0.15,
+    "lambda_feat": 0.1,
+    "lambda_kl": 0.05,
+    "temperature": 2.0,
+    "warmup_epochs": 5,
+    "augmentation_N": 2,
+    "augmentation_M": 9,
+    "gradient_gate_threshold": 0.0,
+    "gradient_reference": "strong_view_supervised_ce_wrt_strong_features",
+    "component_masks_detached": true,
+    "ema_alpha": 0.999,
+    "preprocessing": "legacy_imagenet",
+    "exclusion_policy": "cross-dataset-corrupt-exclusion-v1.0",
+    "excluded_images": 0
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.4983384866995373,
+      "train_cls": 0.4932942506054352,
+      "train_feat": 0.1756284649687252,
+      "train_kl": 0.2995046108383043,
+      "ramp": 0.2,
+      "source_val_accuracy": 0.7252559726962458,
+      "source_val_loss": 0.8738670251475259,
+      "lr": 0.0,
+      "epoch_seconds": 26.73316264152527,
+      "mean_a_feat": 0.07792456554752475,
+      "median_a_feat": 0.06659878045320511,
+      "mean_a_kl": 0.2643718571297091,
+      "median_a_kl": 0.6788185238838196,
+      "feature_conflict_rate": 0.20905172413793102,
+      "kl_conflict_rate": 0.35398706896551724,
+      "feature_keep_rate": 0.790948275862069,
+      "kl_keep_rate": 0.6460129310344828,
+      "source_domain_conflict_rates": {
+        "Photo": {
+          "feature": 0.16033755274261605,
+          "kl": 0.33212778782399033,
+          "count": 1659
+        },
+        "Sketch": {
+          "feature": 0.22972627270401638,
+          "kl": 0.36326426195958045,
+          "count": 3909
+        }
+      }
+    }
+  ]
+}

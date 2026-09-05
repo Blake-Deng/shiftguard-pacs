@@ -1,0 +1,81 @@
+{
+  "protocol_version": "cgc-v2-zero-threshold-2026-09-04",
+  "dataset": "pacs",
+  "target": "Cartoon",
+  "source_domains": [
+    "Photo",
+    "Art_Painting",
+    "Sketch"
+  ],
+  "inner_validation_domain": null,
+  "selection_protocol": "fixed_source_validation",
+  "method": "cgc",
+  "run_name": "cgc_preflight",
+  "model": "vit-small",
+  "seed": 3407,
+  "best_source_val": 0.9450261780104712,
+  "checkpoint_epoch": 1,
+  "target_accuracy": null,
+  "target_loss": null,
+  "n_train": 6501,
+  "n_val": 1146,
+  "n_test": 0,
+  "target_evaluations": 0,
+  "elapsed_seconds": 35.0370192527771,
+  "peak_gpu_memory_bytes": 4839854080,
+  "config": {
+    "val_fraction": 0.15,
+    "lambda_feat": 0.1,
+    "lambda_kl": 0.05,
+    "temperature": 2.0,
+    "warmup_epochs": 5,
+    "augmentation_N": 2,
+    "augmentation_M": 9,
+    "gradient_gate_threshold": 0.0,
+    "gradient_reference": "strong_view_supervised_ce_wrt_strong_features",
+    "component_masks_detached": true,
+    "ema_alpha": 0.999,
+    "preprocessing": "timm_vit_standard",
+    "exclusion_policy": "cross-dataset-corrupt-exclusion-v1.0",
+    "excluded_images": 0
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.42913429276777965,
+      "train_cls": 0.42402478831239265,
+      "train_feat": 0.1296052163337717,
+      "train_kl": 0.37027997988285405,
+      "ramp": 0.2,
+      "source_val_accuracy": 0.9450261780104712,
+      "source_val_loss": 0.17971877812247003,
+      "lr": 0.0,
+      "epoch_seconds": 30.59386372566223,
+      "mean_a_feat": 0.11073559913059551,
+      "median_a_feat": 0.10420602560043335,
+      "mean_a_kl": 0.3815941771759339,
+      "median_a_kl": 0.8834173679351807,
+      "feature_conflict_rate": 0.2103960396039604,
+      "kl_conflict_rate": 0.2990408415841584,
+      "feature_keep_rate": 0.7896039603960396,
+      "kl_keep_rate": 0.7009591584158416,
+      "source_domain_conflict_rates": {
+        "Photo": {
+          "feature": 0.11347517730496454,
+          "kl": 0.175177304964539,
+          "count": 1410
+        },
+        "Art_Painting": {
+          "feature": 0.13988439306358383,
+          "kl": 0.2,
+          "count": 1730
+        },
+        "Sketch": {
+          "feature": 0.2882069795427196,
+          "kl": 0.40312876052948254,
+          "count": 3324
+        }
+      }
+    }
+  ]
+}

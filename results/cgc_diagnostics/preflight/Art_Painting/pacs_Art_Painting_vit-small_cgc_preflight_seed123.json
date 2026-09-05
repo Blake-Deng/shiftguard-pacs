@@ -1,0 +1,46 @@
+{
+  "dataset": "pacs",
+  "target": "Art_Painting",
+  "seed": 123,
+  "method": "cgc",
+  "model": "vit-small",
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.4991073501961572,
+      "train_cls": 0.4939918510261036,
+      "train_feat": 0.14464844507830485,
+      "train_kl": 0.35982462295464107,
+      "ramp": 0.2,
+      "source_val_accuracy": 0.9546599496221663,
+      "source_val_loss": 0.12909417220889446,
+      "lr": 0.0,
+      "epoch_seconds": 31.99508309364319,
+      "mean_a_feat": 0.10197311221764678,
+      "median_a_feat": 0.0970933772623539,
+      "mean_a_kl": 0.3205003618298741,
+      "median_a_kl": 0.8079679906368256,
+      "feature_conflict_rate": 0.23080357142857144,
+      "kl_conflict_rate": 0.3333333333333333,
+      "feature_keep_rate": 0.7691964285714286,
+      "kl_keep_rate": 0.6666666666666666,
+      "source_domain_conflict_rates": {
+        "Photo": {
+          "feature": 0.09618104667609619,
+          "kl": 0.15912305516265912,
+          "count": 1414
+        },
+        "Cartoon": {
+          "feature": 0.1797979797979798,
+          "kl": 0.2601010101010101,
+          "count": 1980
+        },
+        "Sketch": {
+          "feature": 0.3184004810583283,
+          "kl": 0.45099218280216474,
+          "count": 3326
+        }
+      }
+    }
+  ]
+}

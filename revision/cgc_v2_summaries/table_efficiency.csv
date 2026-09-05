@@ -1,0 +1,4 @@
+method,train_seconds_per_epoch_mean_over_targets,total_train_minutes_mean_over_targets,peak_gpu_memory_gib_max_over_targets,parameters,batch1_inference_latency_ms,inference_protocol
+strong_aug,30.11290133198102,15.05645066599051,5.678312301635742,23522375,4.712670809822157,100 FP16 forward passes after 20 warmups on one RTX 5090; batch size 1.
+feature_plus_kl,30.308886637290318,15.154443318645159,5.677331447601318,23522375,4.768347290810198,100 FP16 forward passes after 20 warmups on one RTX 5090; batch size 1.
+cgc,30.260401868820193,15.130200934410096,5.677332401275635,23522375,4.822473450331017,100 FP16 forward passes after 20 warmups on one RTX 5090; batch size 1.

@@ -1,0 +1,5 @@
+target,relative_path,ground_truth,strong_aug_prediction,strong_aug_confidence,strong_aug_correct,feature_plus_kl_prediction,feature_plus_kl_confidence,feature_plus_kl_correct,cgc_prediction,cgc_confidence,cgc_correct
+Photo,data/PACS/photo/giraffe/04847.jpg,giraffe,giraffe,0.9241700172424316,True,horse,0.6134452223777771,False,giraffe,0.9223886132240295,True
+Art_Painting,data/PACS/art_painting/house/01545.jpg,house,house,0.9011311531066895,True,horse,0.68387770652771,False,house,0.9915135502815247,True
+Cartoon,data/PACS/cartoon/elephant/02834.jpg,elephant,elephant,0.4543551802635193,True,elephant,0.8067508935928345,True,giraffe,0.9952477812767029,False
+Sketch,data/PACS/sketch/giraffe/07682.jpg,giraffe,giraffe,0.9093305468559265,True,giraffe,0.9907852411270142,True,dog,0.9761441349983215,False

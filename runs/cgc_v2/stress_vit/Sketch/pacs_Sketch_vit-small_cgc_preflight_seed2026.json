@@ -1,0 +1,81 @@
+{
+  "protocol_version": "cgc-v2-zero-threshold-2026-09-04",
+  "dataset": "pacs",
+  "target": "Sketch",
+  "source_domains": [
+    "Photo",
+    "Art_Painting",
+    "Cartoon"
+  ],
+  "inner_validation_domain": null,
+  "selection_protocol": "fixed_source_validation",
+  "method": "cgc",
+  "run_name": "cgc_preflight",
+  "model": "vit-small",
+  "seed": 2026,
+  "best_source_val": 0.9581958195819582,
+  "checkpoint_epoch": 1,
+  "target_accuracy": null,
+  "target_loss": null,
+  "n_train": 5153,
+  "n_val": 909,
+  "n_test": 0,
+  "target_evaluations": 0,
+  "elapsed_seconds": 29.818946599960327,
+  "peak_gpu_memory_bytes": 4839854080,
+  "config": {
+    "val_fraction": 0.15,
+    "lambda_feat": 0.1,
+    "lambda_kl": 0.05,
+    "temperature": 2.0,
+    "warmup_epochs": 5,
+    "augmentation_N": 2,
+    "augmentation_M": 9,
+    "gradient_gate_threshold": 0.0,
+    "gradient_reference": "strong_view_supervised_ce_wrt_strong_features",
+    "component_masks_detached": true,
+    "ema_alpha": 0.999,
+    "preprocessing": "timm_vit_standard",
+    "exclusion_policy": "cross-dataset-corrupt-exclusion-v1.0",
+    "excluded_images": 0
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.41388130057603123,
+      "train_cls": 0.4069918079301715,
+      "train_feat": 0.15917445961385965,
+      "train_kl": 0.47201919574290513,
+      "ramp": 0.2,
+      "source_val_accuracy": 0.9581958195819582,
+      "source_val_loss": 0.1338290799208338,
+      "lr": 0.0,
+      "epoch_seconds": 25.186795473098755,
+      "mean_a_feat": 0.12617353744863066,
+      "median_a_feat": 0.11441138759255409,
+      "mean_a_kl": 0.5246468032529265,
+      "median_a_kl": 0.9474600851535797,
+      "feature_conflict_rate": 0.1525390625,
+      "kl_conflict_rate": 0.226171875,
+      "feature_keep_rate": 0.8474609375,
+      "kl_keep_rate": 0.773828125,
+      "source_domain_conflict_rates": {
+        "Photo": {
+          "feature": 0.11584932480454868,
+          "kl": 0.1947405828002843,
+          "count": 1407
+        },
+        "Art_Painting": {
+          "feature": 0.15389048991354468,
+          "kl": 0.2276657060518732,
+          "count": 1735
+        },
+        "Cartoon": {
+          "feature": 0.17745197168857432,
+          "kl": 0.24721941354903942,
+          "count": 1978
+        }
+      }
+    }
+  ]
+}

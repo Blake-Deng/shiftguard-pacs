@@ -1,0 +1,1235 @@
+{
+  "protocol_version": "cgc-v2-zero-threshold-2026-09-04",
+  "dataset": "vlcs",
+  "target": "VOC2007",
+  "source_domains": [
+    "Caltech101",
+    "LabelMe",
+    "SUN09"
+  ],
+  "inner_validation_domain": null,
+  "selection_protocol": "fixed_source_validation",
+  "method": "cgc",
+  "run_name": "cgc",
+  "model": "resnet50",
+  "seed": 3407,
+  "best_source_val": 0.8328792007266121,
+  "checkpoint_epoch": 14,
+  "target_accuracy": 0.7283767772511849,
+  "target_loss": 1.3516656781824845,
+  "n_train": 6248,
+  "n_val": 1101,
+  "n_test": 3376,
+  "target_evaluations": 1,
+  "elapsed_seconds": 2177.4401235580444,
+  "peak_gpu_memory_bytes": 6095923712,
+  "config": {
+    "val_fraction": 0.15,
+    "lambda_feat": 0.1,
+    "lambda_kl": 0.05,
+    "temperature": 2.0,
+    "warmup_epochs": 5,
+    "augmentation_N": 2,
+    "augmentation_M": 9,
+    "gradient_gate_threshold": 0.0,
+    "gradient_reference": "strong_view_supervised_ce_wrt_strong_features",
+    "component_masks_detached": true,
+    "ema_alpha": 0.999,
+    "preprocessing": "legacy_imagenet",
+    "exclusion_policy": "cross-dataset-corrupt-exclusion-v1.0",
+    "excluded_images": 4
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.6017278429773665,
+      "train_cls": 0.5970133604462614,
+      "train_feat": 0.21541897875746502,
+      "train_kl": 0.17311278717189105,
+      "ramp": 0.2,
+      "source_val_accuracy": 0.8228882833787466,
+      "source_val_loss": 0.4654203654485979,
+      "lr": 0.00029917828430524096,
+      "epoch_seconds": 73.61243653297424,
+      "mean_a_feat": 0.06045057539562287,
+      "median_a_feat": 0.060008855536580086,
+      "mean_a_kl": 0.26716761684888907,
+      "median_a_kl": 0.6898217499256134,
+      "feature_conflict_rate": 0.21681701030927836,
+      "kl_conflict_rate": 0.35711984536082475,
+      "feature_keep_rate": 0.7831829896907216,
+      "kl_keep_rate": 0.6428801546391752,
+      "source_domain_conflict_rates": {
+        "Caltech101": {
+          "feature": 0.10050251256281408,
+          "kl": 0.3082077051926298,
+          "count": 1194
+        },
+        "LabelMe": {
+          "feature": 0.2694023193577163,
+          "kl": 0.3991971454058876,
+          "count": 2242
+        },
+        "SUN09": {
+          "feature": 0.22438672438672438,
+          "kl": 0.34415584415584416,
+          "count": 2772
+        }
+      }
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.4235200044727817,
+      "train_cls": 0.41449150335542934,
+      "train_feat": 0.16833775928340008,
+      "train_kl": 0.22059931421710044,
+      "ramp": 0.4,
+      "source_val_accuracy": 0.812897366030881,
+      "source_val_loss": 0.48455423047405743,
+      "lr": 0.0002967221401100708,
+      "epoch_seconds": 71.31702780723572,
+      "mean_a_feat": 0.07688941176378104,
+      "median_a_feat": 0.07460267096757889,
+      "mean_a_kl": 0.34674822714254167,
+      "median_a_kl": 0.8802377581596375,
+      "feature_conflict_rate": 0.1955541237113402,
+      "kl_conflict_rate": 0.31990979381443296,
+      "feature_keep_rate": 0.8044458762886598,
+      "kl_keep_rate": 0.680090206185567,
+      "source_domain_conflict_rates": {
+        "Caltech101": {
+          "feature": 0.13472803347280335,
+          "kl": 0.3129707112970711,
+          "count": 1195
+        },
+        "LabelMe": {
+          "feature": 0.2358997314234557,
+          "kl": 0.3437779767233662,
+          "count": 2234
+        },
+        "SUN09": {
+          "feature": 0.18927671824397266,
+          "kl": 0.30370636919755306,
+          "count": 2779
+        }
+      }
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.36351937516448424,
+      "train_cls": 0.34874564194187674,
+      "train_feat": 0.16213115020511076,
+      "train_kl": 0.27048863009693697,
+      "ramp": 0.6,
+      "source_val_accuracy": 0.8283378746594006,
+      "source_val_loss": 0.4840716353425592,
+      "lr": 0.00029265847744427303,
+      "epoch_seconds": 71.40454268455505,
+      "mean_a_feat": 0.08724509606253912,
+      "median_a_feat": 0.08609664812684059,
+      "mean_a_kl": 0.3885191717382656,
+      "median_a_kl": 0.9221585988998413,
+      "feature_conflict_rate": 0.18331185567010308,
+      "kl_conflict_rate": 0.29445876288659795,
+      "feature_keep_rate": 0.8166881443298969,
+      "kl_keep_rate": 0.7055412371134021,
+      "source_domain_conflict_rates": {
+        "Caltech101": {
+          "feature": 0.1375,
+          "kl": 0.29583333333333334,
+          "count": 1200
+        },
+        "LabelMe": {
+          "feature": 0.21271831616659204,
+          "kl": 0.3255709807433945,
+          "count": 2233
+        },
+        "SUN09": {
+          "feature": 0.17945945945945946,
+          "kl": 0.2688288288288288,
+          "count": 2775
+        }
+      }
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.31902816784136073,
+      "train_cls": 0.2977483490693201,
+      "train_feat": 0.15460968194241376,
+      "train_kl": 0.3216233230435971,
+      "ramp": 0.8,
+      "source_val_accuracy": 0.8310626702997275,
+      "source_val_loss": 0.5044479775834629,
+      "lr": 0.0002870318186463901,
+      "epoch_seconds": 73.187082529068,
+      "mean_a_feat": 0.09812445272191982,
+      "median_a_feat": 0.09559598937630653,
+      "mean_a_kl": 0.4097664534020839,
+      "median_a_kl": 0.9361835718154907,
+      "feature_conflict_rate": 0.17461340206185566,
+      "kl_conflict_rate": 0.2849548969072165,
+      "feature_keep_rate": 0.8253865979381443,
+      "kl_keep_rate": 0.7150451030927835,
+      "source_domain_conflict_rates": {
+        "Caltech101": {
+          "feature": 0.1518456375838926,
+          "kl": 0.2953020134228188,
+          "count": 1192
+        },
+        "LabelMe": {
+          "feature": 0.20677361853832443,
+          "kl": 0.31506238859180036,
+          "count": 2244
+        },
+        "SUN09": {
+          "feature": 0.15836940836940838,
+          "kl": 0.25613275613275616,
+          "count": 2772
+        }
+      }
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.286811303232134,
+      "train_cls": 0.2591291626857728,
+      "train_feat": 0.1489976351101374,
+      "train_kl": 0.354524201953534,
+      "ramp": 1.0,
+      "source_val_accuracy": 0.8256130790190735,
+      "source_val_loss": 0.5323406840525174,
+      "lr": 0.0002799038105676658,
+      "epoch_seconds": 73.62360095977783,
+      "mean_a_feat": 0.10010224481549213,
+      "median_a_feat": 0.09633435681462288,
+      "mean_a_kl": 0.381706431278234,
+      "median_a_kl": 0.9397505819797516,
+      "feature_conflict_rate": 0.1713917525773196,
+      "kl_conflict_rate": 0.3005798969072165,
+      "feature_keep_rate": 0.8286082474226805,
+      "kl_keep_rate": 0.6994201030927835,
+      "source_domain_conflict_rates": {
+        "Caltech101": {
+          "feature": 0.13926174496644295,
+          "kl": 0.3640939597315436,
+          "count": 1192
+        },
+        "LabelMe": {
+          "feature": 0.20017833259028087,
+          "kl": 0.3174320106999554,
+          "count": 2243
+        },
+        "SUN09": {
+          "feature": 0.16191849981968987,
+          "kl": 0.2596465921384782,
+          "count": 2773
+        }
+      }
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.24454883063576885,
+      "train_cls": 0.21641939686438472,
+      "train_feat": 0.14521460711341544,
+      "train_kl": 0.38055973292626055,
+      "ramp": 1.0,
+      "source_val_accuracy": 0.8192552225249773,
+      "source_val_loss": 0.5794991949680164,
+      "lr": 0.0002713525491562421,
+      "epoch_seconds": 69.52249956130981,
+      "mean_a_feat": 0.104957291754826,
+      "median_a_feat": 0.10147394239902496,
+      "mean_a_kl": 0.39983902132814,
+      "median_a_kl": 0.9483496844768524,
+      "feature_conflict_rate": 0.1794458762886598,
+      "kl_conflict_rate": 0.29075386597938147,
+      "feature_keep_rate": 0.8205541237113402,
+      "kl_keep_rate": 0.7092461340206185,
+      "source_domain_conflict_rates": {
+        "Caltech101": {
+          "feature": 0.18478260869565216,
+          "kl": 0.3595317725752508,
+          "count": 1196
+        },
+        "LabelMe": {
+          "feature": 0.2087617344658024,
+          "kl": 0.3115780062583818,
+          "count": 2237
+        },
+        "SUN09": {
+          "feature": 0.1535135135135135,
+          "kl": 0.24432432432432433,
+          "count": 2775
+        }
+      }
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.22554807556965917,
+      "train_cls": 0.19721512911245995,
+      "train_feat": 0.14148617151778997,
+      "train_kl": 0.3891483279540367,
+      "ramp": 1.0,
+      "source_val_accuracy": 0.810172570390554,
+      "source_val_loss": 0.632467042324222,
+      "lr": 0.00026147172382160914,
+      "epoch_seconds": 70.10660409927368,
+      "mean_a_feat": 0.10662416013341143,
+      "median_a_feat": 0.10335295274853706,
+      "mean_a_kl": 0.38926242707542036,
+      "median_a_kl": 0.9557306170463562,
+      "feature_conflict_rate": 0.1802512886597938,
+      "kl_conflict_rate": 0.29864690721649484,
+      "feature_keep_rate": 0.8197487113402062,
+      "kl_keep_rate": 0.7013530927835051,
+      "source_domain_conflict_rates": {
+        "Caltech101": {
+          "feature": 0.17666666666666667,
+          "kl": 0.3675,
+          "count": 1200
+        },
+        "LabelMe": {
+          "feature": 0.19186046511627908,
+          "kl": 0.3005366726296959,
+          "count": 2236
+        },
+        "SUN09": {
+          "feature": 0.17243867243867245,
+          "kl": 0.26731601731601734,
+          "count": 2772
+        }
+      }
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.19387961409448348,
+      "train_cls": 0.16431796208945745,
+      "train_feat": 0.13790521394346178,
+      "train_kl": 0.41597131278711497,
+      "ramp": 1.0,
+      "source_val_accuracy": 0.8292461398728429,
+      "source_val_loss": 0.6262602634625074,
+      "lr": 0.00025036959095382875,
+      "epoch_seconds": 71.7561604976654,
+      "mean_a_feat": 0.1102663237820285,
+      "median_a_feat": 0.10504287481307983,
+      "mean_a_kl": 0.3730944643077668,
+      "median_a_kl": 0.9581343829631805,
+      "feature_conflict_rate": 0.17606314432989692,
+      "kl_conflict_rate": 0.3025128865979381,
+      "feature_keep_rate": 0.8239368556701031,
+      "kl_keep_rate": 0.6974871134020618,
+      "source_domain_conflict_rates": {
+        "Caltech101": {
+          "feature": 0.1939799331103679,
+          "kl": 0.3996655518394649,
+          "count": 1196
+        },
+        "LabelMe": {
+          "feature": 0.19883824843610368,
+          "kl": 0.30384271671134944,
+          "count": 2238
+        },
+        "SUN09": {
+          "feature": 0.1499639509733237,
+          "kl": 0.2595529920692141,
+          "count": 2774
+        }
+      }
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.16182681856696138,
+      "train_cls": 0.13228775468683734,
+      "train_feat": 0.13319937861764553,
+      "train_kl": 0.4131518437997582,
+      "ramp": 1.0,
+      "source_val_accuracy": 0.8265213442325159,
+      "source_val_loss": 0.6758239033376522,
+      "lr": 0.000238167787843871,
+      "epoch_seconds": 73.17741799354553,
+      "mean_a_feat": 0.11931049938662984,
+      "median_a_feat": 0.11178088560700417,
+      "mean_a_kl": 0.4074433121479779,
+      "median_a_kl": 0.9676890075206757,
+      "feature_conflict_rate": 0.16865335051546393,
+      "kl_conflict_rate": 0.28769329896907214,
+      "feature_keep_rate": 0.8313466494845361,
+      "kl_keep_rate": 0.7123067010309279,
+      "source_domain_conflict_rates": {
+        "Caltech101": {
+          "feature": 0.1889168765743073,
+          "kl": 0.36523929471032746,
+          "count": 1191
+        },
+        "LabelMe": {
+          "feature": 0.18133095131755247,
+          "kl": 0.2836087539079946,
+          "count": 2239
+        },
+        "SUN09": {
+          "feature": 0.14974802015838734,
+          "kl": 0.257739380849532,
+          "count": 2778
+        }
+      }
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.14721511799803713,
+      "train_cls": 0.11823520000985603,
+      "train_feat": 0.12756184649836158,
+      "train_kl": 0.4019388542654588,
+      "ramp": 1.0,
+      "source_val_accuracy": 0.821071752951862,
+      "source_val_loss": 0.7437456380781552,
+      "lr": 0.00022500000000000002,
+      "epoch_seconds": 71.11928820610046,
+      "mean_a_feat": 0.12125069777301309,
+      "median_a_feat": 0.11571695655584335,
+      "mean_a_kl": 0.4218028232777055,
+      "median_a_kl": 0.9712398648262024,
+      "feature_conflict_rate": 0.15480025773195877,
+      "kl_conflict_rate": 0.27931701030927836,
+      "feature_keep_rate": 0.8451997422680413,
+      "kl_keep_rate": 0.7206829896907216,
+      "source_domain_conflict_rates": {
+        "Caltech101": {
+          "feature": 0.189640768588137,
+          "kl": 0.3767752715121136,
+          "count": 1197
+        },
+        "LabelMe": {
+          "feature": 0.15608228980322003,
+          "kl": 0.27191413237924866,
+          "count": 2236
+        },
+        "SUN09": {
+          "feature": 0.13873873873873874,
+          "kl": 0.24324324324324326,
+          "count": 2775
+        }
+      }
+    },
+    {
+      "epoch": 11,
+      "train_loss": 0.1338093891432605,
+      "train_cls": 0.10609664631642632,
+      "train_feat": 0.12208354596010189,
+      "train_kl": 0.3941456105598469,
+      "ramp": 1.0,
+      "source_val_accuracy": 0.8256130790190735,
+      "source_val_loss": 0.7408092681594466,
+      "lr": 0.0002110104964613701,
+      "epoch_seconds": 70.62934350967407,
+      "mean_a_feat": 0.12068883454474455,
+      "median_a_feat": 0.11394096165895462,
+      "mean_a_kl": 0.4197034500864846,
+      "median_a_kl": 0.9720547497272491,
+      "feature_conflict_rate": 0.16478737113402062,
+      "kl_conflict_rate": 0.27899484536082475,
+      "feature_keep_rate": 0.8352126288659794,
+      "kl_keep_rate": 0.7210051546391752,
+      "source_domain_conflict_rates": {
+        "Caltech101": {
+          "feature": 0.19630872483221476,
+          "kl": 0.3464765100671141,
+          "count": 1192
+        },
+        "LabelMe": {
+          "feature": 0.16912092815707275,
+          "kl": 0.2757697456492637,
+          "count": 2241
+        },
+        "SUN09": {
+          "feature": 0.14774774774774774,
+          "kl": 0.2526126126126126,
+          "count": 2775
+        }
+      }
+    },
+    {
+      "epoch": 12,
+      "train_loss": 0.1225854438758388,
+      "train_cls": 0.09442919477359536,
+      "train_feat": 0.12385737581044129,
+      "train_kl": 0.3906222929045097,
+      "ramp": 1.0,
+      "source_val_accuracy": 0.8165304268846503,
+      "source_val_loss": 0.8545779985763542,
+      "lr": 0.00019635254915624216,
+      "epoch_seconds": 71.56213188171387,
+      "mean_a_feat": 0.12220187972464364,
+      "median_a_feat": 0.11513405665755272,
+      "mean_a_kl": 0.42583462937399574,
+      "median_a_kl": 0.9745317995548248,
+      "feature_conflict_rate": 0.15882731958762886,
+      "kl_conflict_rate": 0.2767396907216495,
+      "feature_keep_rate": 0.8411726804123711,
+      "kl_keep_rate": 0.7232603092783505,
+      "source_domain_conflict_rates": {
+        "Caltech101": {
+          "feature": 0.20502092050209206,
+          "kl": 0.3891213389121339,
+          "count": 1195
+        },
+        "LabelMe": {
+          "feature": 0.1535029004908523,
+          "kl": 0.25925925925925924,
+          "count": 2241
+        },
+        "SUN09": {
+          "feature": 0.14321789321789322,
+          "kl": 0.24242424242424243,
+          "count": 2772
+        }
+      }
+    },
+    {
+      "epoch": 13,
+      "train_loss": 0.10130918004847679,
+      "train_cls": 0.07482453607522029,
+      "train_feat": 0.11765124886920772,
+      "train_kl": 0.3740665556229267,
+      "ramp": 1.0,
+      "source_val_accuracy": 0.8237965485921889,
+      "source_val_loss": 0.9042170278351165,
+      "lr": 0.00018118675362266393,
+      "epoch_seconds": 72.78152418136597,
+      "mean_a_feat": 0.11854249881044901,
+      "median_a_feat": 0.10951367393136024,
+      "mean_a_kl": 0.3910987801052037,
+      "median_a_kl": 0.9712513387203217,
+      "feature_conflict_rate": 0.16913659793814434,
+      "kl_conflict_rate": 0.29494201030927836,
+      "feature_keep_rate": 0.8308634020618557,
+      "kl_keep_rate": 0.7050579896907216,
+      "source_domain_conflict_rates": {
+        "Caltech101": {
+          "feature": 0.21637426900584794,
+          "kl": 0.41687552213868,
+          "count": 1197
+        },
+        "LabelMe": {
+          "feature": 0.1759465478841871,
+          "kl": 0.2824053452115813,
+          "count": 2245
+        },
+        "SUN09": {
+          "feature": 0.14316702819956617,
+          "kl": 0.25234996384671005,
+          "count": 2766
+        }
+      }
+    },
+    {
+      "epoch": 14,
+      "train_loss": 0.08758042806509844,
+      "train_cls": 0.06214623953955075,
+      "train_feat": 0.11401232385758273,
+      "train_kl": 0.3493985917764841,
+      "ramp": 1.0,
+      "source_val_accuracy": 0.8328792007266121,
+      "source_val_loss": 0.8825597149655341,
+      "lr": 0.0001656792694901481,
+      "epoch_seconds": 73.30106568336487,
+      "mean_a_feat": 0.12103765505355452,
+      "median_a_feat": 0.11207801103591919,
+      "mean_a_kl": 0.3964047030932147,
+      "median_a_kl": 0.9739448130130768,
+      "feature_conflict_rate": 0.17461340206185566,
+      "kl_conflict_rate": 0.29059278350515466,
+      "feature_keep_rate": 0.8253865979381443,
+      "kl_keep_rate": 0.7094072164948454,
+      "source_domain_conflict_rates": {
+        "Caltech101": {
+          "feature": 0.25418060200668896,
+          "kl": 0.4498327759197324,
+          "count": 1196
+        },
+        "LabelMe": {
+          "feature": 0.1642124051762606,
+          "kl": 0.26104417670682734,
+          "count": 2241
+        },
+        "SUN09": {
+          "feature": 0.14868278599783472,
+          "kl": 0.2457596535546734,
+          "count": 2771
+        }
+      }
+    },
+    {
+      "epoch": 15,
+      "train_loss": 0.08154858566206141,
+      "train_cls": 0.057180604647806624,
+      "train_feat": 0.11151462278722488,
+      "train_kl": 0.3317528311739263,
+      "ramp": 1.0,
+      "source_val_accuracy": 0.8228882833787466,
+      "source_val_loss": 1.0244426244339457,
+      "lr": 0.0001500000000000001,
+      "epoch_seconds": 72.39639687538147,
+      "mean_a_feat": 0.12130334697102951,
+      "median_a_feat": 0.11222390830516815,
+      "mean_a_kl": 0.3883643220424065,
+      "median_a_kl": 0.9730067849159241,
+      "feature_conflict_rate": 0.16897551546391754,
+      "kl_conflict_rate": 0.29107603092783507,
+      "feature_keep_rate": 0.8310244845360825,
+      "kl_keep_rate": 0.7089239690721649,
+      "source_domain_conflict_rates": {
+        "Caltech101": {
+          "feature": 0.24140821458507963,
+          "kl": 0.4383906119027661,
+          "count": 1193
+        },
+        "LabelMe": {
+          "feature": 0.16189624329159213,
+          "kl": 0.2629695885509839,
+          "count": 2236
+        },
+        "SUN09": {
+          "feature": 0.14357682619647355,
+          "kl": 0.2504498020870817,
+          "count": 2779
+        }
+      }
+    },
+    {
+      "epoch": 16,
+      "train_loss": 0.07659722446012743,
+      "train_cls": 0.05259655526426343,
+      "train_feat": 0.10989869731603209,
+      "train_kl": 0.322467581666622,
+      "ramp": 1.0,
+      "source_val_accuracy": 0.8119891008174387,
+      "source_val_loss": 0.9791643681230866,
+      "lr": 0.00013432073050985205,
+      "epoch_seconds": 72.45904207229614,
+      "mean_a_feat": 0.12267669370236052,
+      "median_a_feat": 0.1117052361369133,
+      "mean_a_kl": 0.3858581045562985,
+      "median_a_kl": 0.972508043050766,
+      "feature_conflict_rate": 0.1643041237113402,
+      "kl_conflict_rate": 0.29059278350515466,
+      "feature_keep_rate": 0.8356958762886598,
+      "kl_keep_rate": 0.7094072164948454,
+      "source_domain_conflict_rates": {
+        "Caltech101": {
+          "feature": 0.2322472848788638,
+          "kl": 0.4553049289891395,
+          "count": 1197
+        },
+        "LabelMe": {
+          "feature": 0.15178571428571427,
+          "kl": 0.2629464285714286,
+          "count": 2240
+        },
+        "SUN09": {
+          "feature": 0.14507398051245038,
+          "kl": 0.24178996752075063,
+          "count": 2771
+        }
+      }
+    },
+    {
+      "epoch": 17,
+      "train_loss": 0.07332777948185955,
+      "train_cls": 0.049422479177028245,
+      "train_feat": 0.10850385230841096,
+      "train_kl": 0.3207703364878586,
+      "ramp": 1.0,
+      "source_val_accuracy": 0.8201634877384196,
+      "source_val_loss": 1.0085257341655478,
+      "lr": 0.00011881324637733612,
+      "epoch_seconds": 72.4630880355835,
+      "mean_a_feat": 0.1234015471245256,
+      "median_a_feat": 0.11491074413061142,
+      "mean_a_kl": 0.3969990072020158,
+      "median_a_kl": 0.9753883481025696,
+      "feature_conflict_rate": 0.1560889175257732,
+      "kl_conflict_rate": 0.28366623711340205,
+      "feature_keep_rate": 0.8439110824742269,
+      "kl_keep_rate": 0.7163337628865979,
+      "source_domain_conflict_rates": {
+        "Caltech101": {
+          "feature": 0.19279128248113997,
+          "kl": 0.41827326068734283,
+          "count": 1193
+        },
+        "LabelMe": {
+          "feature": 0.15113687026304057,
+          "kl": 0.2625947391885867,
+          "count": 2243
+        },
+        "SUN09": {
+          "feature": 0.1443001443001443,
+          "kl": 0.2427849927849928,
+          "count": 2772
+        }
+      }
+    },
+    {
+      "epoch": 18,
+      "train_loss": 0.0600109585589662,
+      "train_cls": 0.038534309662225624,
+      "train_feat": 0.10401057874419026,
+      "train_kl": 0.27599875513733046,
+      "ramp": 1.0,
+      "source_val_accuracy": 0.8219800181653043,
+      "source_val_loss": 1.0516109490288348,
+      "lr": 0.00010364745084375793,
+      "epoch_seconds": 72.47131729125977,
+      "mean_a_feat": 0.11659994340510182,
+      "median_a_feat": 0.10659097507596016,
+      "mean_a_kl": 0.3923707053249224,
+      "median_a_kl": 0.9735233783721924,
+      "feature_conflict_rate": 0.16800902061855671,
+      "kl_conflict_rate": 0.28769329896907214,
+      "feature_keep_rate": 0.8319909793814433,
+      "kl_keep_rate": 0.7123067010309279,
+      "source_domain_conflict_rates": {
+        "Caltech101": {
+          "feature": 0.23327759197324416,
+          "kl": 0.4439799331103679,
+          "count": 1196
+        },
+        "LabelMe": {
+          "feature": 0.15521855486173058,
+          "kl": 0.26672613737734163,
+          "count": 2242
+        },
+        "SUN09": {
+          "feature": 0.15018050541516245,
+          "kl": 0.23718411552346572,
+          "count": 2770
+        }
+      }
+    },
+    {
+      "epoch": 19,
+      "train_loss": 0.05472845436294669,
+      "train_cls": 0.03493162143265003,
+      "train_feat": 0.0988976445394693,
+      "train_kl": 0.25339035543891575,
+      "ramp": 1.0,
+      "source_val_accuracy": 0.8247048138056312,
+      "source_val_loss": 1.0361556625701056,
+      "lr": 8.898950353863002e-05,
+      "epoch_seconds": 72.0736734867096,
+      "mean_a_feat": 0.11487765931821821,
+      "median_a_feat": 0.10096655786037445,
+      "mean_a_kl": 0.3787400387911625,
+      "median_a_kl": 0.9729149043560028,
+      "feature_conflict_rate": 0.16929768041237114,
+      "kl_conflict_rate": 0.2920425257731959,
+      "feature_keep_rate": 0.8307023195876289,
+      "kl_keep_rate": 0.7079574742268041,
+      "source_domain_conflict_rates": {
+        "Caltech101": {
+          "feature": 0.2301255230125523,
+          "kl": 0.44602510460251044,
+          "count": 1195
+        },
+        "LabelMe": {
+          "feature": 0.16994633273703041,
+          "kl": 0.2893559928443649,
+          "count": 2236
+        },
+        "SUN09": {
+          "feature": 0.14259992797983434,
+          "kl": 0.22794382427079582,
+          "count": 2777
+        }
+      }
+    },
+    {
+      "epoch": 20,
+      "train_loss": 0.04953940787842286,
+      "train_cls": 0.029849795693022766,
+      "train_feat": 0.09889147046607794,
+      "train_kl": 0.24453819136029667,
+      "ramp": 1.0,
+      "source_val_accuracy": 0.8328792007266121,
+      "source_val_loss": 1.0093891573579243,
+      "lr": 7.500000000000005e-05,
+      "epoch_seconds": 72.36190247535706,
+      "mean_a_feat": 0.11824902178001988,
+      "median_a_feat": 0.10267943516373634,
+      "mean_a_kl": 0.3818327031364141,
+      "median_a_kl": 0.9705280065536499,
+      "feature_conflict_rate": 0.15528350515463918,
+      "kl_conflict_rate": 0.2846327319587629,
+      "feature_keep_rate": 0.8447164948453608,
+      "kl_keep_rate": 0.7153672680412371,
+      "source_domain_conflict_rates": {
+        "Caltech101": {
+          "feature": 0.23366834170854273,
+          "kl": 0.4304857621440536,
+          "count": 1194
+        },
+        "LabelMe": {
+          "feature": 0.13762287756925826,
+          "kl": 0.2649687220732797,
+          "count": 2238
+        },
+        "SUN09": {
+          "feature": 0.13580691642651296,
+          "kl": 0.2377521613832853,
+          "count": 2776
+        }
+      }
+    },
+    {
+      "epoch": 21,
+      "train_loss": 0.04639598259644717,
+      "train_cls": 0.0276793584265967,
+      "train_feat": 0.09679562506294742,
+      "train_kl": 0.22600616491639736,
+      "ramp": 1.0,
+      "source_val_accuracy": 0.8310626702997275,
+      "source_val_loss": 1.0618114592308698,
+      "lr": 6.183221215612906e-05,
+      "epoch_seconds": 72.5750105381012,
+      "mean_a_feat": 0.1166416459573842,
+      "median_a_feat": 0.10053107142448425,
+      "mean_a_kl": 0.3801736380211372,
+      "median_a_kl": 0.9678612649440765,
+      "feature_conflict_rate": 0.16527061855670103,
+      "kl_conflict_rate": 0.2760953608247423,
+      "feature_keep_rate": 0.834729381443299,
+      "kl_keep_rate": 0.7239046391752577,
+      "source_domain_conflict_rates": {
+        "Caltech101": {
+          "feature": 0.25146198830409355,
+          "kl": 0.429406850459482,
+          "count": 1197
+        },
+        "LabelMe": {
+          "feature": 0.1533660276415515,
+          "kl": 0.25947391885867144,
+          "count": 2243
+        },
+        "SUN09": {
+          "feature": 0.13764450867052022,
+          "kl": 0.22326589595375723,
+          "count": 2768
+        }
+      }
+    },
+    {
+      "epoch": 22,
+      "train_loss": 0.04292712742750792,
+      "train_cls": 0.024819590686580417,
+      "train_feat": 0.09590310856853564,
+      "train_kl": 0.2159084926560982,
+      "ramp": 1.0,
+      "source_val_accuracy": 0.8247048138056312,
+      "source_val_loss": 1.0550056752150005,
+      "lr": 4.963040904617133e-05,
+      "epoch_seconds": 73.27391862869263,
+      "mean_a_feat": 0.11694412276343082,
+      "median_a_feat": 0.10107040405273438,
+      "mean_a_kl": 0.3818740526242146,
+      "median_a_kl": 0.9689453542232513,
+      "feature_conflict_rate": 0.16043814432989692,
+      "kl_conflict_rate": 0.2847938144329897,
+      "feature_keep_rate": 0.8395618556701031,
+      "kl_keep_rate": 0.7152061855670103,
+      "source_domain_conflict_rates": {
+        "Caltech101": {
+          "feature": 0.24392288348700755,
+          "kl": 0.44006705783738476,
+          "count": 1193
+        },
+        "LabelMe": {
+          "feature": 0.15178571428571427,
+          "kl": 0.2598214285714286,
+          "count": 2240
+        },
+        "SUN09": {
+          "feature": 0.13153153153153152,
+          "kl": 0.2381981981981982,
+          "count": 2775
+        }
+      }
+    },
+    {
+      "epoch": 23,
+      "train_loss": 0.039048780226292684,
+      "train_cls": 0.02165461952567638,
+      "train_feat": 0.0951710552284398,
+      "train_kl": 0.20181751827296524,
+      "ramp": 1.0,
+      "source_val_accuracy": 0.8247048138056312,
+      "source_val_loss": 1.0889924603920822,
+      "lr": 3.852827617839091e-05,
+      "epoch_seconds": 74.23497271537781,
+      "mean_a_feat": 0.1172533424768729,
+      "median_a_feat": 0.0987301766872406,
+      "mean_a_kl": 0.3869896801260598,
+      "median_a_kl": 0.9705361127853394,
+      "feature_conflict_rate": 0.1634987113402062,
+      "kl_conflict_rate": 0.2773840206185567,
+      "feature_keep_rate": 0.8365012886597938,
+      "kl_keep_rate": 0.7226159793814433,
+      "source_domain_conflict_rates": {
+        "Caltech101": {
+          "feature": 0.2633779264214047,
+          "kl": 0.4707357859531773,
+          "count": 1196
+        },
+        "LabelMe": {
+          "feature": 0.15298840321141838,
+          "kl": 0.24665477252453166,
+          "count": 2242
+        },
+        "SUN09": {
+          "feature": 0.12888086642599278,
+          "kl": 0.2187725631768953,
+          "count": 2770
+        }
+      }
+    },
+    {
+      "epoch": 24,
+      "train_loss": 0.03907937844543113,
+      "train_cls": 0.021981841208864504,
+      "train_feat": 0.09289114960690134,
+      "train_kl": 0.19473636065868988,
+      "ramp": 1.0,
+      "source_val_accuracy": 0.8219800181653043,
+      "source_val_loss": 1.073195063701275,
+      "lr": 2.8647450843757908e-05,
+      "epoch_seconds": 74.18686246871948,
+      "mean_a_feat": 0.11458212016748114,
+      "median_a_feat": 0.09806627780199051,
+      "mean_a_kl": 0.3765146758862064,
+      "median_a_kl": 0.9685762524604797,
+      "feature_conflict_rate": 0.16027706185567012,
+      "kl_conflict_rate": 0.2765786082474227,
+      "feature_keep_rate": 0.8397229381443299,
+      "kl_keep_rate": 0.7234213917525774,
+      "source_domain_conflict_rates": {
+        "Caltech101": {
+          "feature": 0.2619647355163728,
+          "kl": 0.4659949622166247,
+          "count": 1191
+        },
+        "LabelMe": {
+          "feature": 0.14489522960321,
+          "kl": 0.2501114578689255,
+          "count": 2243
+        },
+        "SUN09": {
+          "feature": 0.12905551550108146,
+          "kl": 0.21665465032444123,
+          "count": 2774
+        }
+      }
+    },
+    {
+      "epoch": 25,
+      "train_loss": 0.03175001051852998,
+      "train_cls": 0.016485459038018027,
+      "train_feat": 0.09008710032578596,
+      "train_kl": 0.16126966883534008,
+      "ramp": 1.0,
+      "source_val_accuracy": 0.8219800181653043,
+      "source_val_loss": 1.1126230126299679,
+      "lr": 2.00961894323342e-05,
+      "epoch_seconds": 73.91115379333496,
+      "mean_a_feat": 0.11318700300103113,
+      "median_a_feat": 0.09545523673295975,
+      "mean_a_kl": 0.38043252382130116,
+      "median_a_kl": 0.9647016227245331,
+      "feature_conflict_rate": 0.1559278350515464,
+      "kl_conflict_rate": 0.27367912371134023,
+      "feature_keep_rate": 0.8440721649484536,
+      "kl_keep_rate": 0.7263208762886598,
+      "source_domain_conflict_rates": {
+        "Caltech101": {
+          "feature": 0.2520938023450586,
+          "kl": 0.46063651591289784,
+          "count": 1194
+        },
+        "LabelMe": {
+          "feature": 0.14068780705672176,
+          "kl": 0.251004912907548,
+          "count": 2239
+        },
+        "SUN09": {
+          "feature": 0.12684684684684686,
+          "kl": 0.21153153153153154,
+          "count": 2775
+        }
+      }
+    },
+    {
+      "epoch": 26,
+      "train_loss": 0.03147912893405894,
+      "train_cls": 0.015964306704940024,
+      "train_feat": 0.0910172272742409,
+      "train_kl": 0.16264554858207703,
+      "ramp": 1.0,
+      "source_val_accuracy": 0.8301544050862852,
+      "source_val_loss": 1.1036024000425886,
+      "lr": 1.2968181353609857e-05,
+      "epoch_seconds": 72.12165641784668,
+      "mean_a_feat": 0.11338352263247384,
+      "median_a_feat": 0.09506064280867577,
+      "mean_a_kl": 0.38269485190622365,
+      "median_a_kl": 0.9653383493423462,
+      "feature_conflict_rate": 0.16237113402061856,
+      "kl_conflict_rate": 0.26771907216494845,
+      "feature_keep_rate": 0.8376288659793815,
+      "kl_keep_rate": 0.7322809278350515,
+      "source_domain_conflict_rates": {
+        "Caltech101": {
+          "feature": 0.30351170568561875,
+          "kl": 0.49414715719063546,
+          "count": 1196
+        },
+        "LabelMe": {
+          "feature": 0.13169642857142858,
+          "kl": 0.23035714285714284,
+          "count": 2240
+        },
+        "SUN09": {
+          "feature": 0.12626262626262627,
+          "kl": 0.2002164502164502,
+          "count": 2772
+        }
+      }
+    },
+    {
+      "epoch": 27,
+      "train_loss": 0.03175986760785592,
+      "train_cls": 0.01652475123020062,
+      "train_feat": 0.08958063174768821,
+      "train_kl": 0.16003175183516188,
+      "ramp": 1.0,
+      "source_val_accuracy": 0.8292461398728429,
+      "source_val_loss": 1.1049351679932218,
+      "lr": 7.341522555726972e-06,
+      "epoch_seconds": 72.28955411911011,
+      "mean_a_feat": 0.11336457984622574,
+      "median_a_feat": 0.09646482393145561,
+      "mean_a_kl": 0.3793636783987485,
+      "median_a_kl": 0.9648332595825195,
+      "feature_conflict_rate": 0.16043814432989692,
+      "kl_conflict_rate": 0.27142396907216493,
+      "feature_keep_rate": 0.8395618556701031,
+      "kl_keep_rate": 0.7285760309278351,
+      "source_domain_conflict_rates": {
+        "Caltech101": {
+          "feature": 0.2907268170426065,
+          "kl": 0.48705096073517123,
+          "count": 1197
+        },
+        "LabelMe": {
+          "feature": 0.1392235609103079,
+          "kl": 0.23293172690763053,
+          "count": 2241
+        },
+        "SUN09": {
+          "feature": 0.12129963898916968,
+          "kl": 0.20938628158844766,
+          "count": 2770
+        }
+      }
+    },
+    {
+      "epoch": 28,
+      "train_loss": 0.036387407576146814,
+      "train_cls": 0.02018768562138388,
+      "train_feat": 0.09057945950129598,
+      "train_kl": 0.17639774418215162,
+      "ramp": 1.0,
+      "source_val_accuracy": 0.8274296094459582,
+      "source_val_loss": 1.112531526316138,
+      "lr": 3.2778598899291474e-06,
+      "epoch_seconds": 71.6218638420105,
+      "mean_a_feat": 0.1145138202237203,
+      "median_a_feat": 0.09782367944717407,
+      "mean_a_kl": 0.37487437135338775,
+      "median_a_kl": 0.9640224277973175,
+      "feature_conflict_rate": 0.15753865979381443,
+      "kl_conflict_rate": 0.26771907216494845,
+      "feature_keep_rate": 0.8424613402061856,
+      "kl_keep_rate": 0.7322809278350515,
+      "source_domain_conflict_rates": {
+        "Caltech101": {
+          "feature": 0.25774058577405856,
+          "kl": 0.4686192468619247,
+          "count": 1195
+        },
+        "LabelMe": {
+          "feature": 0.13941018766756033,
+          "kl": 0.2287756925826631,
+          "count": 2238
+        },
+        "SUN09": {
+          "feature": 0.129009009009009,
+          "kl": 0.2126126126126126,
+          "count": 2775
+        }
+      }
+    },
+    {
+      "epoch": 29,
+      "train_loss": 0.030340861721137136,
+      "train_cls": 0.015181745432518884,
+      "train_feat": 0.08922004991585446,
+      "train_kl": 0.15861353946408047,
+      "ramp": 1.0,
+      "source_val_accuracy": 0.8256130790190735,
+      "source_val_loss": 1.1370187267918244,
+      "lr": 8.2171569475899e-07,
+      "epoch_seconds": 70.00467681884766,
+      "mean_a_feat": 0.11370048709958488,
+      "median_a_feat": 0.095109473913908,
+      "mean_a_kl": 0.363822079874958,
+      "median_a_kl": 0.9597868621349335,
+      "feature_conflict_rate": 0.15850515463917525,
+      "kl_conflict_rate": 0.2773840206185567,
+      "feature_keep_rate": 0.8414948453608248,
+      "kl_keep_rate": 0.7226159793814433,
+      "source_domain_conflict_rates": {
+        "Caltech101": {
+          "feature": 0.269907795473596,
+          "kl": 0.49706621961441744,
+          "count": 1193
+        },
+        "LabelMe": {
+          "feature": 0.14413208389112003,
+          "kl": 0.23471664435519857,
+          "count": 2241
+        },
+        "SUN09": {
+          "feature": 0.12220620043258831,
+          "kl": 0.21737563085796682,
+          "count": 2774
+        }
+      }
+    },
+    {
+      "epoch": 30,
+      "train_loss": 0.032573363436482004,
+      "train_cls": 0.017076666882746498,
+      "train_feat": 0.09001434410048514,
+      "train_kl": 0.16575151128867238,
+      "ramp": 1.0,
+      "source_val_accuracy": 0.8265213442325159,
+      "source_val_loss": 1.107817313389292,
+      "lr": 0.0,
+      "epoch_seconds": 75.22432017326355,
+      "mean_a_feat": 0.11246521136112766,
+      "median_a_feat": 0.09211177751421928,
+      "mean_a_kl": 0.3562869493432221,
+      "median_a_kl": 0.9542618095874786,
+      "feature_conflict_rate": 0.16043814432989692,
+      "kl_conflict_rate": 0.27835051546391754,
+      "feature_keep_rate": 0.8395618556701031,
+      "kl_keep_rate": 0.7216494845360825,
+      "source_domain_conflict_rates": {
+        "Caltech101": {
+          "feature": 0.276006711409396,
+          "kl": 0.49077181208053694,
+          "count": 1192
+        },
+        "LabelMe": {
+          "feature": 0.13130861991960696,
+          "kl": 0.23179991067440822,
+          "count": 2239
+        },
+        "SUN09": {
+          "feature": 0.13431760893050054,
+          "kl": 0.22470291681670868,
+          "count": 2777
+        }
+      }
+    }
+  ],
+  "audit": {
+    "experiment_id": "formal_vlcs_resnet50_cgc_VOC2007_3407",
+    "protocol_version": "cgc-v2-zero-threshold-2026-09-04",
+    "target_isolation_passed": true,
+    "selection_protocol": "fixed_source_validation",
+    "train_domains": [
+      "Caltech101",
+      "LabelMe",
+      "SUN09"
+    ],
+    "inner_validation_domain": null,
+    "target_evaluations": 1,
+    "checkpoint_epoch": 14,
+    "best_source_val_accuracy": 0.8328792007266121,
+    "command": [
+      "/home/dzf/miniforge3/bin/python",
+      "/home/dzf/CVAA/cgc_experiment.py",
+      "--dataset",
+      "vlcs",
+      "--data-root",
+      "/home/dzf/CVAA/data/VLCS",
+      "--target",
+      "VOC2007",
+      "--method",
+      "cgc",
+      "--run-name",
+      "cgc",
+      "--model",
+      "resnet50",
+      "--seed",
+      "3407",
+      "--epochs",
+      "30",
+      "--batch-size",
+      "64",
+      "--workers",
+      "4",
+      "--image-size",
+      "224",
+      "--val-fraction",
+      "0.15",
+      "--lr",
+      "0.0003",
+      "--weight-decay",
+      "0.0001",
+      "--lambda-feat",
+      "0.10",
+      "--lambda-kl",
+      "0.05",
+      "--temperature",
+      "2",
+      "--warmup-epochs",
+      "5",
+      "--augmentation-m",
+      "9",
+      "--ema-alpha",
+      "0.999",
+      "--preprocessing",
+      "legacy_imagenet",
+      "--selection-protocol",
+      "fixed_source_validation",
+      "--device",
+      "cuda:0",
+      "--output",
+      "/home/dzf/CVAA/runs/cgc_v2/formal_cgc/vlcs/resnet50/cgc/VOC2007/3407",
+      "--diagnostics-output",
+      "/home/dzf/CVAA/results/cgc_diagnostics/formal_cgc/vlcs/resnet50/cgc/VOC2007/3407",
+      "--exclusions",
+      "/home/dzf/CVAA/revision/cross_dataset_exclusions.json",
+      "--save-checkpoint"
+    ],
+    "code_sha256": "4860910abd2f2b2a5bfcbdf2864dad567b2075264a28eb697a3a2024416d0751",
+    "pytorch_version": "2.11.0+cu128",
+    "torchvision_version": "0.26.0+cu128",
+    "timm_version": "1.0.29",
+    "cuda_version": "12.8",
+    "gpu_model": "NVIDIA GeForce RTX 5090",
+    "start_time": "2026-09-04T16:18:59.304402+00:00",
+    "end_time": "2026-09-04T16:55:21.804696+00:00",
+    "wall_clock_minutes": 36.29066872596741
+  }
+}

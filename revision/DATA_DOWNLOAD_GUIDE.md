@@ -66,8 +66,8 @@ Both commands must finish without an exception. Keep the two inventory JSON file
 Upload the extracted folders, not only the inventory files:
 
 ```text
-/home/dzf/CVAA/data/VLCS/
-/home/dzf/CVAA/data/OfficeHome/
+data/VLCS/
+data/OfficeHome/
 ```
 
-After upload, the same validator will run again on the server. Formal manifests will only be created if the image count, shared classes, readable-image check, and deterministic fingerprint pass.
+After placement, run the same validator again from the repository root. Formal manifests will only be created if the image count, shared classes, readable-image check, and deterministic fingerprint pass.
